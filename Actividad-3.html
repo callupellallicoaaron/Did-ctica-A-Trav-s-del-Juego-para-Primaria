@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="es">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portada Universitaria</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            box-sizing: border-box;
+            font-family: 'Georgia', serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            overflow-auto;
+        }
+
+        .portada {
+            background: white;
+            border-bottom: 4px solid #FF8C00;
+            padding: 40px 20px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 35px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .portada-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .logo {
+            width: 110px;
+            height: 110px;
+            background: linear-gradient(135deg, #FF8C00 0%, #FF6B00 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 22px;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        .info-institucional {
+            flex: 1;
+        }
+
+        .info-institucional h2 {
+            margin: 0 0 15px 0;
+            color: #1a1a1a;
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .info-institucional p {
+            margin: 8px 0;
+            color: #333;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .info-estudiante {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .info-estudiante p {
+            margin: 8px 0;
+            color: #333;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .info-estudiante p strong {
+            color: #FF8C00;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .portada-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 25px;
+            }
+            
+            .info-estudiante {
+                text-align: center;
+            }
+            
+            .info-institucional h2 {
+                font-size: 22px;
+            }
+            
+            .info-institucional p,
+            .info-estudiante p {
+                font-size: 15px;
+            }
+            
+            .logo {
+                width: 90px;
+                height: 90px;
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .portada {
+                padding: 20px 15px;
+            }
+            
+            .portada-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .info-institucional h2 {
+                font-size: 18px;
+            }
+            
+            .info-institucional p,
+            .info-estudiante p {
+                font-size: 13px;
+            }
+            
+            .logo {
+                width: 80px;
+                height: 80px;
+                font-size: 18px;
+            }
+        }
+        
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 40px 20px;
+        }
+    </style>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="portada">
+   <div class="portada-container"><img src="https://proveedoresutp.utp.edu.pe/img/logo-utp.d277c146.png" alt="Logo UTP" loading="lazy" onerror="console.error('Logo failed to load:', this.src); this.outerHTML='<div class=\'logo\'>UTP</div>';" style="width: 110px; height: 110px; object-fit: contain; flex-shrink: 0;">
+    <div class="info-institucional">
+     <h2 id="university-name">Universidad Tecnológica del Perú</h2>
+     <p id="faculty">Facultad de Educación</p>
+     <p id="course">Didáctica A Través del Juego para Primaria</p>
+     <p id="section">Sección 43872</p>
+    </div>
+    <div class="info-estudiante">
+     <p><strong id="student-name">Aaron Sixto Callupe Llallico</strong></p>
+     <p><strong>Ruth Ester Sanchez Verastegui</strong></p>
+     <p><strong>Estefany Yeraldin Inga Moreno</strong></p>
+     <p id="student-career">Estudiantes de Educación Primaria</p>
+     <p id="activity">Semana 3 - Exposición</p>
+    </div>
+   </div>
+  </div>
+  <div class="content-section" id="main-content">
+   <div style="margin-bottom: 60px;"><!-- SECCIÓN DE ESTACIÓN DE APRENDIZAJE LÚDICO -->
+    <div style="background: linear-gradient(135deg, #FFE5B4 0%, #FFDAB9 100%); padding: 30px; border-radius: 12px; margin-bottom: 40px; box-shadow: 0 8px 20px rgba(255, 140, 0, 0.15); display: flex; align-items: center; gap: 20px;">
+     <svg width="100" height="100" viewbox="0 0 100 100" style="flex-shrink: 0;">
+      <circle cx="50" cy="50" r="48" fill="#FF6B35" opacity="0.15" stroke="#FF6B35" stroke-width="2" /> <text x="50" y="65" font-size="60" text-anchor="middle">
+       🎮
+      </text>
+     </svg>
+     <div>
+      <h1 style="color: #FF6B35; font-size: 32px; margin: 0 0 10px 0; font-weight: bold;">ESTACIÓN DE APRENDIZAJE LÚDICO</h1>
+      <p style="color: #D84315; font-size: 16px; margin: 0; font-style: italic;">Un viaje divertido hacia el aprendizaje significativo</p>
+     </div>
+    </div><!-- I. NOMBRE DEL JUEGO -->
+    <div style="background: white; padding: 25px; margin-bottom: 25px; border-left: 5px solid #FF6B35; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);">
+     <h2 style="color: #FF6B35; font-size: 24px; margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;"><span style="font-size: 28px;">🎯</span> I. Nombre del Juego</h2>
+     <p id="game_title" style="color: #333; font-size: 18px; margin: 0; font-weight: 600; font-family: 'Georgia', serif;">El Mercado Matemático</p>
+    </div><!-- II. TIPO DE JUEGO -->
+    <div style="background: white; padding: 25px; margin-bottom: 25px; border-left: 5px solid #4CAF50; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);">
+     <h2 style="color: #4CAF50; font-size: 24px; margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;"><span style="font-size: 28px;">🃏</span> II. Tipo de Juego</h2>
+     <p id="game_type" style="color: #333; font-size: 18px; margin: 0; font-family: 'Georgia', serif;">Juego de Reglas y Simbólico</p>
+    </div><!-- III. FUNCIÓN DOMINANTE -->
+    <div style="background: white; padding: 25px; margin-bottom: 25px; border-left: 5px solid #9C27B0; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);">
+     <h2 style="color: #9C27B0; font-size: 24px; margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;"><span style="font-size: 28px;">🧠</span> III. Función Dominante</h2>
+     <p id="cognitive_function" style="color: #333; font-size: 18px; margin: 0; font-family: 'Georgia', serif;">Cognitiva: Desarrollo del razonamiento lógico-matemático</p>
+    </div><!-- IV. DESCRIPCIÓN DEL JUEGO -->
+    <div style="background: white; padding: 25px; margin-bottom: 25px; border-left: 5px solid #2196F3; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);">
+     <h2 style="color: #2196F3; font-size: 24px; margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;"><span style="font-size: 28px;">📖</span> IV. Descripción del Juego</h2>
+     <div style="display: flex; gap: 20px; align-items: flex-start;">
+      <svg width="120" height="120" viewbox="0 0 120 120" style="flex-shrink: 0;">
+       <circle cx="60" cy="60" r="58" fill="#E3F2FD" stroke="#2196F3" stroke-width="2" /> <text x="60" y="75" font-size="70" text-anchor="middle">
+        🛒
+       </text>
+      </svg>
+      <p style="color: #333; font-size: 16px; margin: 0; line-height: 1.8; font-family: 'Georgia', serif; flex: 1;">El Mercado Matemático es una actividad donde los estudiantes simulan un mercado real. Algunos niños serán vendedores y otros compradores. Usarán dinero ficticio para comprar y vender productos (frutas, verduras, juguetes, etc.), resolviendo operaciones matemáticas básicas durante la interacción.</p>
+     </div>
+    </div><!-- V. SUSTENTACIÓN TEÓRICA -->
+    <div style="background: #F5F5F5; padding: 25px; margin-bottom: 25px; border-left: 5px solid #FF9800; border-radius: 8px;">
+     <h2 style="color: #FF9800; font-size: 24px; margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;"><span style="font-size: 28px;">🧠</span> V. Sustentación Teórica</h2>
+     <h3 style="color: #333; font-size: 18px; margin: 0 0 12px 0; font-weight: bold;">¿Cómo se evidencia el Constructivismo?</h3>
+     <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+      <svg width="80" height="80" viewbox="0 0 80 80" style="flex-shrink: 0;">
+       <circle cx="40" cy="40" r="38" fill="#FFF3E0" stroke="#FF9800" stroke-width="2" /> <text x="40" y="55" font-size="50" text-anchor="middle">
+        🏗️
+       </text>
+      </svg>
+      <p style="color: #333; font-size: 16px; margin: 0; line-height: 1.8; font-family: 'Georgia', serif; flex: 1;">Este juego se basa en el constructivismo, ya que el estudiante aprende haciendo y experimentando. El niño construye su conocimiento al interactuar con objetos, resolver problemas reales y tomar decisiones.</p>
+     </div>
+     <div style="background: white; padding: 15px; border-radius: 6px; margin-top: 12px;">
+      <p style="color: #333; font-size: 16px; margin: 0 0 10px 0; font-weight: 600; font-family: 'Georgia', serif;">Por ejemplo:</p>
+      <ul style="color: #333; font-size: 15px; margin: 0; padding-left: 20px; line-height: 2; font-family: 'Georgia', serif;">
+       <li>💰 Al comprar un producto, el estudiante calcula cuánto debe pagar.</li>
+       <li>🔄 Al vender, calcula el cambio que debe entregar.</li>
+       <li>✨ Así, el aprendizaje no es memorístico, sino significativo y contextualizado.</li>
+      </ul>
+     </div>
+    </div><!-- VI. INSTRUCCIONES -->
+    <div style="background: white; padding: 25px; margin-bottom: 25px; border-left: 5px solid #E91E63; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);">
+     <h2 style="color: #E91E63; font-size: 24px; margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;"><span style="font-size: 28px;">📝</span> VI. Instrucciones para el Estudiante</h2>
+     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
+      <div style="background: #FCE4EC; padding: 20px; border-radius: 8px; border-left: 4px solid #E91E63; border-bottom: 3px solid #E91E63;">
+       <div style="font-size: 40px; margin-bottom: 10px;">
+        👥
+       </div>
+       <p style="color: #333; font-size: 16px; margin: 0; font-weight: 700; font-family: 'Georgia', serif;">Paso 1: Formar grupos</p>
+       <p style="color: #666; font-size: 14px; margin: 8px 0 0 0; font-family: 'Georgia', serif;">Elegir roles de vendedor o comprador</p>
+      </div>
+      <div style="background: #F3E5F5; padding: 20px; border-radius: 8px; border-left: 4px solid #9C27B0; border-bottom: 3px solid #9C27B0;">
+       <div style="font-size: 40px; margin-bottom: 10px;">
+        🏪
+       </div>
+       <p style="color: #333; font-size: 16px; margin: 0; font-weight: 700; font-family: 'Georgia', serif;">Paso 2: Organizar puesto</p>
+       <p style="color: #666; font-size: 14px; margin: 8px 0 0 0; font-family: 'Georgia', serif;">Productos con precios</p>
+      </div>
+      <div style="background: #E8EAF6; padding: 20px; border-radius: 8px; border-left: 4px solid #3F51B5; border-bottom: 3px solid #3F51B5;">
+       <div style="font-size: 40px; margin-bottom: 10px;">
+        💵
+       </div>
+       <p style="color: #333; font-size: 16px; margin: 0; font-weight: 700; font-family: 'Georgia', serif;">Paso 3: Dinero ficticio</p>
+       <p style="color: #666; font-size: 14px; margin: 8px 0 0 0; font-family: 'Georgia', serif;">Para los compradores</p>
+      </div>
+      <div style="background: #E0F2F1; padding: 20px; border-radius: 8px; border-left: 4px solid #009688; border-bottom: 3px solid #009688;">
+       <div style="font-size: 40px; margin-bottom: 10px;">
+        🧮
+       </div>
+       <p style="color: #333; font-size: 16px; margin: 0; font-weight: 700; font-family: 'Georgia', serif;">Paso 4: Resolver operaciones</p>
+       <p style="color: #666; font-size: 14px; margin: 8px 0 0 0; font-family: 'Georgia', serif;">Sumas y restas</p>
+      </div>
+      <div style="background: #F1F8E9; padding: 20px; border-radius: 8px; border-left: 4px solid #558B2F; border-bottom: 3px solid #558B2F;">
+       <div style="font-size: 40px; margin-bottom: 10px;">
+        🔄
+       </div>
+       <p style="color: #333; font-size: 16px; margin: 0; font-weight: 700; font-family: 'Georgia', serif;">Paso 5: Dar cambio</p>
+       <p style="color: #666; font-size: 14px; margin: 8px 0 0 0; font-family: 'Georgia', serif;">Si es necesario</p>
+      </div>
+      <div style="background: #FFEBEE; padding: 20px; border-radius: 8px; border-left: 4px solid #C62828; border-bottom: 3px solid #C62828;">
+       <div style="font-size: 40px; margin-bottom: 10px;">
+        🔁
+       </div>
+       <p style="color: #333; font-size: 16px; margin: 0; font-weight: 700; font-family: 'Georgia', serif;">Paso 6: Cambiar roles</p>
+       <p style="color: #666; font-size: 14px; margin: 8px 0 0 0; font-family: 'Georgia', serif;">Todos participan</p>
+      </div>
+     </div>
+    </div><!-- VII. OBJETIVOS DE APRENDIZAJE -->
+    <div style="background: #E8F5E9; padding: 25px; margin-bottom: 25px; border-left: 5px solid #4CAF50; border-radius: 8px;">
+     <h2 style="color: #4CAF50; font-size: 24px; margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;"><span style="font-size: 28px;">🎯</span> VII. Objetivos de Aprendizaje</h2>
+     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+      <div style="background: white; padding: 15px; border-radius: 6px; border-top: 3px solid #4CAF50;">
+       <p style="color: #333; font-size: 16px; margin: 0; font-weight: 600; font-family: 'Georgia', serif;">🧮 Resolver operaciones</p>
+       <p style="color: #666; font-size: 14px; margin: 8px 0 0 0;">Suma y resta básicas</p>
+      </div>
+      <div style="background: white; padding: 15px; border-radius: 6px; border-top: 3px solid #4CAF50;">
+       <p style="color: #333; font-size: 16px; margin: 0; font-weight: 600; font-family: 'Georgia', serif;">💭 Cálculo mental</p>
+       <p style="color: #666; font-size: 14px; margin: 8px 0 0 0;">Habilidades matemáticas</p>
+      </div>
+      <div style="background: white; padding: 15px; border-radius: 6px; border-top: 3px solid #4CAF50;">
+       <p style="color: #333; font-size: 16px; margin: 0; font-weight: 600; font-family: 'Georgia', serif;">⚡ Toma de decisiones</p>
+       <p style="color: #666; font-size: 14px; margin: 8px 0 0 0;">Criterio y pensamiento</p>
+      </div>
+      <div style="background: white; padding: 15px; border-radius: 6px; border-top: 3px solid #4CAF50;">
+       <p style="color: #333; font-size: 16px; margin: 0; font-weight: 600; font-family: 'Georgia', serif;">🤝 Interacción social</p>
+       <p style="color: #666; font-size: 14px; margin: 8px 0 0 0;">Trabajo en equipo</p>
+      </div>
+     </div>
+    </div><!-- VIII. MATERIALES -->
+    <div style="background: white; padding: 25px; margin-bottom: 25px; border-left: 5px solid #00BCD4; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);">
+     <h2 style="color: #00BCD4; font-size: 24px; margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;"><span style="font-size: 28px;">🧩</span> VIII. Materiales</h2>
+     <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+      <div style="background: #E0F7FA; padding: 15px 20px; border-radius: 8px; border-left: 3px solid #00BCD4; display: flex; align-items: center; gap: 10px;">
+       <span style="font-size: 32px;">💵</span> <span style="color: #333; font-size: 15px; font-family: 'Georgia', serif; font-weight: 500;">Billetes y monedas</span>
+      </div>
+      <div style="background: #E0F7FA; padding: 15px 20px; border-radius: 8px; border-left: 3px solid #00BCD4; display: flex; align-items: center; gap: 10px;">
+       <span style="font-size: 32px;">🥕</span> <span style="color: #333; font-size: 15px; font-family: 'Georgia', serif; font-weight: 500;">Productos (reales o dibujos)</span>
+      </div>
+      <div style="background: #E0F7FA; padding: 15px 20px; border-radius: 8px; border-left: 3px solid #00BCD4; display: flex; align-items: center; gap: 10px;">
+       <span style="font-size: 32px;">🏷️</span> <span style="color: #333; font-size: 15px; font-family: 'Georgia', serif; font-weight: 500;">Carteles con precios</span>
+      </div>
+      <div style="background: #E0F7FA; padding: 15px 20px; border-radius: 8px; border-left: 3px solid #00BCD4; display: flex; align-items: center; gap: 10px;">
+       <span style="font-size: 32px;">🏪</span> <span style="color: #333; font-size: 15px; font-family: 'Georgia', serif; font-weight: 500;">Mesas para puestos</span>
+      </div>
+     </div>
+    </div><!-- IX. EJEMPLO PRÁCTICO -->
+    <div style="background: linear-gradient(135deg, #FFF9C4 0%, #FFEB3B 100%); padding: 25px; margin-bottom: 25px; border-left: 5px solid #FBC02D; border-radius: 8px; box-shadow: 0 8px 20px rgba(251, 192, 45, 0.2);">
+     <h2 style="color: #F57F17; font-size: 24px; margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;"><span style="font-size: 28px;">💡</span> IX. Ejemplo Práctico</h2>
+     <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 15px; display: flex; gap: 15px;">
+      <svg width="100" height="100" viewbox="0 0 100 100" style="flex-shrink: 0;">
+       <circle cx="50" cy="50" r="48" fill="#FFF59D" stroke="#FBC02D" stroke-width="2" /> <text x="50" y="65" font-size="60" text-anchor="middle">
+        🍎
+       </text>
+      </svg>
+      <div>
+       <p style="color: #333; font-size: 16px; margin: 0 0 10px 0; font-family: 'Georgia', serif;"><strong>Situación:</strong> Juan compra una manzana que cuesta 3 soles y paga con 20 soles.</p>
+       <p style="color: #F57F17; font-size: 16px; margin: 0; font-weight: 600; font-family: 'Georgia', serif;">¿Cuánto dinero debe recibir Juan como cambio?</p>
+      </div>
+     </div>
+     <div style="background: #E3F2FD; padding: 20px; border-radius: 6px; margin-bottom: 12px; text-align: center;">
+      <p style="color: #1565C0; font-size: 16px; margin: 0 0 10px 0; font-weight: 600;">👉 Debe resolver:</p>
+      <p style="color: #1565C0; font-size: 32px; margin: 0; font-weight: bold; font-family: 'Courier New', monospace;">20 - 3 = 17</p>
+     </div>
+     <div style="background: #C8E6C9; padding: 20px; border-radius: 6px; text-align: center;">
+      <p style="color: #2E7D32; font-size: 18px; margin: 0; font-weight: 700; font-family: 'Georgia', serif;">✔ Juan debe recibir S/ 17 soles de vuelto</p>
+      <p style="color: #2E7D32; font-size: 14px; margin: 12px 0 0 0; font-style: italic; font-family: 'Georgia', serif;">A través de este tipo de situaciones, el estudiante no solo resuelve operaciones matemáticas, sino que comprende su utilidad en la vida diaria.</p>
+     </div>
+    </div><!-- X. CONCLUSIÓN -->
+    <div style="background: linear-gradient(135deg, #E0F2F1 0%, #B2DFDB 100%); padding: 30px; margin-bottom: 40px; border-left: 5px solid #009688; border-radius: 8px; box-shadow: 0 8px 20px rgba(0, 150, 136, 0.15);">
+     <h2 style="color: #004D40; font-size: 24px; margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;"><span style="font-size: 28px;">📝</span> X. Conclusión</h2>
+     <div style="display: flex; gap: 20px; align-items: flex-start;">
+      <svg width="100" height="100" viewbox="0 0 100 100" style="flex-shrink: 0;">
+       <circle cx="50" cy="50" r="48" fill="white" opacity="0.5" stroke="#009688" stroke-width="2" /> <text x="50" y="65" font-size="60" text-anchor="middle">
+        🎉
+       </text>
+      </svg>
+      <p style="color: #004D40; font-size: 16px; margin: 0; line-height: 1.9; font-family: 'Georgia', serif; flex: 1;">El juego planteado demuestra que el aprendizaje puede ser divertido, significativo y útil. A través del juego, los estudiantes desarrollan habilidades matemáticas y sociales en un entorno dinámico y participativo. <strong>¡El aprendizaje es mejor cuando se juega! 🌟</strong></p>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+        const defaultConfig = {
+            university_name: 'Universidad Tecnológica del Perú',
+            faculty: 'Facultad de Educación',
+            course: 'Didáctica A Través del Juego para Primaria',
+            section: 'Sección 43872',
+            student_name: 'Aaron Sixto Callupe Llallico',
+            student_career: 'Estudiantes de Educación Primaria',
+            activity: 'Semana 3 - Exposición',
+            game_title: 'El Mercado Matemático',
+            game_type: 'Juego de Reglas y Simbólico',
+            cognitive_function: 'Cognitiva: Desarrollo del razonamiento lógico-matemático'
+        };
+
+        let config = { ...defaultConfig };
+
+        const element = {
+            defaultConfig,
+            onConfigChange: async (newConfig) => {
+                config = { ...newConfig };
+                
+                document.getElementById('university-name').textContent = config.university_name || defaultConfig.university_name;
+                document.getElementById('faculty').textContent = config.faculty || defaultConfig.faculty;
+                document.getElementById('course').textContent = config.course || defaultConfig.course;
+                document.getElementById('section').textContent = config.section || defaultConfig.section;
+                document.getElementById('student-name').textContent = config.student_name || defaultConfig.student_name;
+                document.getElementById('student-career').textContent = config.student_career || defaultConfig.student_career;
+                document.getElementById('activity').textContent = config.activity || defaultConfig.activity;
+                document.getElementById('game_title').textContent = config.game_title || defaultConfig.game_title;
+                document.getElementById('game_type').textContent = config.game_type || defaultConfig.game_type;
+                document.getElementById('cognitive_function').textContent = config.cognitive_function || defaultConfig.cognitive_function;
+            },
+            mapToCapabilities: () => ({
+                recolorables: [],
+                borderables: [],
+                fontEditable: undefined,
+                fontSizeable: undefined
+            }),
+            mapToEditPanelValues: (cfg) => new Map([
+                ['university_name', cfg.university_name || defaultConfig.university_name],
+                ['faculty', cfg.faculty || defaultConfig.faculty],
+                ['course', cfg.course || defaultConfig.course],
+                ['section', cfg.section || defaultConfig.section],
+                ['student_name', cfg.student_name || defaultConfig.student_name],
+                ['student_career', cfg.student_career || defaultConfig.student_career],
+                ['activity', cfg.activity || defaultConfig.activity],
+                ['game_title', cfg.game_title || defaultConfig.game_title],
+                ['game_type', cfg.game_type || defaultConfig.game_type],
+                ['cognitive_function', cfg.cognitive_function || defaultConfig.cognitive_function]
+            ])
+        };
+
+        if (window.elementSdk) {
+            window.elementSdk.init(element);
+        }
+    </script>
+  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e2aba732124c2ce',t:'MTc3NDU3NjA1OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e9dd47a569f952a',t:'MTc3NTc4Mjk4OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
