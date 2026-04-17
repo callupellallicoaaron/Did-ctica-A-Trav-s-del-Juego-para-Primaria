@@ -1,0 +1,1053 @@
+<!doctype html>
+<html lang="es">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LA MISIÓN DEL MUNDO PERDIDO</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Fredoka:wght@400;600;700&display=swap');
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes teamBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            overflow-auto;
+        }
+
+        .portada {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+            border-bottom: 5px solid #ff006e;
+            padding: 40px 20px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 35px;
+            box-shadow: 0 8px 32px rgba(255, 0, 110, 0.15);
+            animation: fadeInDown 0.8s ease-out;
+        }
+        
+        .portada-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .logo {
+            width: 110px;
+            height: 110px;
+            background: linear-gradient(135deg, #ff006e 0%, #d60055 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 22px;
+            border-radius: 15px;
+            flex-shrink: 0;
+            box-shadow: 0 8px 20px rgba(255, 0, 110, 0.3);
+            animation: slideInRight 0.8s ease-out;
+        }
+
+        .info-institucional {
+            flex: 1;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .info-institucional h2 {
+            margin: 0 0 15px 0;
+            background: linear-gradient(135deg, #ff0000, #d60055);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .info-institucional p {
+            margin: 8px 0;
+            color: #333;
+            font-size: 16px;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .info-estudiante {
+            text-align: right;
+            flex-shrink: 0;
+            animation: fadeInDown 1.2s ease-out;
+        }
+
+        .info-estudiante p {
+            margin: 8px 0;
+            color: #333;
+            font-size: 16px;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .info-estudiante p strong {
+            background: linear-gradient(135deg, #014c63, #d60055);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .portada-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 25px;
+            }
+            
+            .info-estudiante {
+                text-align: center;
+            }
+            
+            .info-institucional h2 {
+                font-size: 22px;
+            }
+            
+            .info-institucional p,
+            .info-estudiante p {
+                font-size: 15px;
+            }
+            
+            .logo {
+                width: 90px;
+                height: 90px;
+                font-size: 20px;
+            }
+            
+            .game-card {
+                padding: 25px 20px;
+            }
+            
+            .game-title {
+                font-size: 28px;
+            }
+            
+            .section-title {
+                font-size: 20px;
+            }
+            
+            .challenge-box {
+                padding: 20px;
+            }
+            
+            .challenge-title {
+                font-size: 18px;
+            }
+            
+            .challenge-text {
+                font-size: 16px;
+            }
+            
+            .btn-primary, .btn-attempt, .btn-replay {
+                padding: 12px 25px;
+                font-size: 16px;
+            }
+            
+            textarea {
+                font-size: 13px;
+                padding: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .portada {
+                padding: 20px 15px;
+            }
+            
+            .portada-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .info-institucional h2 {
+                font-size: 18px;
+            }
+            
+            .info-institucional p,
+            .info-estudiante p {
+                font-size: 13px;
+            }
+            
+            .logo {
+                width: 80px;
+                height: 80px;
+                font-size: 18px;
+            }
+            
+            .content-section {
+                padding: 20px 15px;
+            }
+            
+            .game-card {
+                padding: 20px 15px;
+                margin-bottom: 15px;
+                border-radius: 15px;
+            }
+            
+            .game-title {
+                font-size: 22px;
+                margin-bottom: 15px;
+            }
+            
+            .section-title {
+                font-size: 16px;
+            }
+            
+            .skill-box {
+                padding: 15px;
+                margin-bottom: 12px;
+            }
+            
+            .skill-box h3 {
+                font-size: 14px;
+                margin-bottom: 8px;
+            }
+            
+            .reflection-box {
+                padding: 20px;
+                font-size: 15px;
+                margin-bottom: 20px;
+            }
+            
+            .simulation-container {
+                padding: 20px 15px;
+                border-radius: 15px;
+            }
+            
+            .game-header {
+                margin-bottom: 20px;
+            }
+            
+            .game-header h2 {
+                font-size: 20px !important;
+            }
+            
+            .close-btn {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+            
+            #introScreen {
+                padding: 40px 20px !important;
+                border-radius: 15px;
+            }
+            
+            #introScreen div:first-child {
+                font-size: 60px !important;
+            }
+            
+            #introScreen h2 {
+                font-size: 24px !important;
+                margin-bottom: 15px !important;
+            }
+            
+            #introScreen p {
+                font-size: 14px !important;
+                margin-bottom: 20px !important;
+            }
+            
+            .challenge-box {
+                padding: 18px 15px;
+                border-radius: 12px;
+                margin-bottom: 15px;
+            }
+            
+            .challenge-title {
+                font-size: 16px;
+                margin-bottom: 10px;
+            }
+            
+            .challenge-text {
+                font-size: 14px;
+                margin-bottom: 15px;
+                line-height: 1.6;
+            }
+            
+            textarea {
+                font-size: 12px;
+                padding: 10px;
+                min-height: 80px !important;
+                border-radius: 8px;
+            }
+            
+            .btn-primary, .btn-attempt, .btn-replay {
+                padding: 12px 20px;
+                font-size: 14px;
+                border-radius: 10px;
+                width: 100%;
+            }
+            
+            .btn-skip {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+            
+            #gameBoard {
+                padding: 20px 15px !important;
+            }
+            
+            #progressBar {
+                height: 8px;
+            }
+            
+            #levelInfo {
+                font-size: 13px !important;
+            }
+            
+            #finalScreen {
+                padding: 30px 20px !important;
+                border-radius: 15px;
+            }
+            
+            #finalScreen .fa-trophy,
+            .winner-trophy {
+                font-size: 70px !important;
+                margin-bottom: 15px !important;
+            }
+            
+            #finalScreen h2,
+            .winner-text {
+                font-size: 24px !important;
+                margin-bottom: 10px !important;
+            }
+            
+            #finalScreen p,
+            .winner-message {
+                font-size: 14px !important;
+                margin-bottom: 20px !important;
+            }
+            
+            #level2 > div:last-of-type {
+                flex-direction: column !important;
+            }
+            
+            #level2 button {
+                padding: 12px 15px !important;
+                font-size: 13px !important;
+            }
+            
+            #level4 label p {
+                font-size: 13px !important;
+                font-weight: 700 !important;
+            }
+            
+            .result-message {
+                font-size: 14px !important;
+                padding: 12px !important;
+                margin-bottom: 10px !important;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .portada {
+                padding: 15px 10px;
+            }
+            
+            .info-institucional h2 {
+                font-size: 16px;
+            }
+            
+            .game-title {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 14px;
+            }
+            
+            .challenge-title {
+                font-size: 14px;
+            }
+            
+            textarea {
+                min-height: 70px !important;
+                font-size: 11px;
+            }
+            
+            .btn-primary, .btn-attempt, .btn-replay {
+                padding: 10px 15px;
+                font-size: 13px;
+            }
+        }
+        
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .game-title {
+            background: linear-gradient(135deg, #ff006e, #d60055);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 36px;
+            margin: 0 0 20px 0;
+            text-align: center;
+            font-weight: 800;
+        }
+
+        .section-title {
+            color: #1a1a2e;
+            font-size: 24px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skill-box {
+            background: linear-gradient(135deg, #f8f9ff 0%, #fff0f7 100%);
+            padding: 18px;
+            border-left: 5px solid #ff006e;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .skill-box:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(255, 0, 110, 0.1);
+        }
+
+        .skill-box h3 {
+            color: #ff006e;
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .reflection-box {
+            background: linear-gradient(135deg, #ff006e, #d60055);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-weight: 600;
+            box-shadow: 0 8px 25px rgba(255, 0, 110, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff006e, #d60055);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 0, 110, 0.2);
+            animation: pulse 2s infinite;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 0, 110, 0.3);
+            animation: none;
+        }
+
+        .simulation-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .game-header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .close-btn {
+            background: #e0e0e0;
+            color: #1a1a2e;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .close-btn:hover {
+            background: #d0d0d0;
+        }
+
+        .teams-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+
+        .team-box {
+            flex: 1;
+            background: linear-gradient(135deg, #f8f9ff 0%, #fff0f7 100%);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+            animation: teamBounce 2s infinite;
+        }
+
+        .team-box.active {
+            border-color: #ff006e;
+            background: linear-gradient(135deg, #ffe8f0 0%, #fff0f7 100%);
+            box-shadow: 0 5px 20px rgba(255, 0, 110, 0.2);
+        }
+
+        .team-emoji {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        .team-name {
+            color: #1a1a2e;
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .team-progress {
+            color: #ff006e;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .challenge-box {
+            background: linear-gradient(135deg, #ffe8f0 0%, #fff0f7 100%);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #ff006e;
+            margin-bottom: 20px;
+        }
+
+        .challenge-title {
+            color: #ff006e;
+            font-size: 22px;
+            font-weight: 800;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .challenge-text {
+            color: #1a1a2e;
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ff006e;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #d60055;
+            box-shadow: 0 0 10px rgba(255, 0, 110, 0.2);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-attempt {
+            background: linear-gradient(135deg, #ff006e, #d60055);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .btn-attempt:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 0, 110, 0.2);
+        }
+
+        .btn-skip {
+            background: #8e9aaf;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .btn-skip:hover {
+            background: #7a8899;
+            transform: translateY(-3px);
+        }
+
+        .result-box {
+            background: #f0f0f0;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .result-message {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .result-success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .result-fail {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .result-reflexion {
+            background: #e2e3e5;
+            color: #383d41;
+        }
+
+        .winner-box {
+            display: none;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            padding: 40px;
+            border-radius: 20px;
+            border: 3px solid #ff006e;
+            text-align: center;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .winner-trophy {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: pulse 1s infinite;
+        }
+
+        .winner-text {
+            font-size: 36px;
+            font-weight: 800;
+            color: #ff006e;
+            margin-bottom: 15px;
+        }
+
+        .winner-message {
+            font-size: 18px;
+            color: #1a1a2e;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .btn-replay {
+            background: linear-gradient(135deg, #ff006e, #d60055);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .btn-replay:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 0, 110, 0.3);
+        }
+    </style>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="portada">
+   <div class="portada-container">
+    <img src="https://proveedoresutp.utp.edu.pe/img/logo-utp.d277c146.png" alt="Logo UTP" loading="lazy" onerror="console.error('Logo failed to load:', this.src); this.outerHTML='<div class=\'logo\'>UTP</div>';" style="width: 110px; height: 110px; object-fit: contain; flex-shrink: 0;">
+    <div class="info-institucional">
+     <h2 id="university-name">Universidad Tecnológica del Perú</h2>
+     <p id="faculty">Facultad de Educación</p>
+     <p id="course">Didáctica A Través del Juego para Primaria</p>
+     <p id="section">Sección 43872</p>
+    </div>
+    <div class="info-estudiante">
+        <p><strong id="student-name">Adelina Arana Areche</strong></p>
+     <p><strong id="student-name">Aaron Sixto Callupe Llallico</strong></p>
+     <p><strong id="student-name">Estefany Yeraldin Inga Moreno</strong></p>
+     <p><strong id="student-name">Ruth Ester Sanchez Verastegui</strong></p>
+     <p id="student-career">Estudiantes de Educación Primaria</p>
+     <p id="activity">Semana 4 - Actividad 1</p>
+    </div>
+   </div>
+  </div>
+  <div class="content-section" id="main-content">
+   <div class="game-card">
+    <h1 class="game-title">🎲 LA MISIÓN DEL MUNDO PERDIDO</h1>
+    <div style="margin-bottom: 30px;">
+     <h2 class="section-title">🎯 OBJETIVO</h2>
+     <p style="color: #333; font-size: 16px; line-height: 1.8;">Resolver desafíos para recuperar un "tesoro perdido", usando la comunicación, el pensamiento lógico, la creatividad y la reflexión.</p>
+    </div>
+    <div style="margin-bottom: 30px;">
+     <h2 class="section-title">👥 PARTICIPANTES</h2>
+     <p style="color: #333; font-size: 16px; line-height: 1.8;">3 a 5 jugadores</p>
+    </div>
+    <div style="margin-bottom: 30px;">
+     <h2 class="section-title">🧩 MATERIALES</h2>
+     <ul style="color: #333; font-size: 16px; line-height: 1.8;">
+      <li>Tarjetas (pueden ser hojas cortadas)</li>
+      <li>Lápiz o lapicero</li>
+      <li>Una caja o sobre (el "tesoro")</li>
+     </ul>
+    </div>
+    <div style="margin-bottom: 30px;">
+     <h2 class="section-title">📜 REGLAS DEL JUEGO</h2>
+     <ol style="color: #333; font-size: 16px; line-height: 1.8;">
+      <li>Cada grupo recibe tarjetas con retos.</li>
+      <li>En cada turno, un jugador toma una tarjeta y debe cumplir el reto.</li>
+      <li>Si lo logra, el grupo avanza hacia el tesoro.</li>
+      <li>Si falla, el grupo reflexiona y vuelve a intentar.</li>
+      <li>Gana el equipo que complete todos los retos.</li>
+     </ol>
+    </div>
+    <div style="margin-bottom: 30px;">
+     <h2 class="section-title">🔹 ¿CÓMO INTEGRA LAS HABILIDADES?</h2>
+     <div class="skill-box">
+      <h3>🗣️ Lenguaje expresivo</h3>
+      <p style="color: #333; margin: 0;">Los jugadores deben explicar ideas, contar historias o dar argumentos.</p>
+      <p style="color: #666; font-style: italic; margin: 10px 0 0 0;">👉 Ejemplo: "Describe un lugar misterioso sin decir su nombre"</p>
+     </div>
+     <div class="skill-box">
+      <h3>🧠 Pensamiento</h3>
+      <p style="color: #333; margin: 0;">Deben resolver problemas o tomar decisiones.</p>
+      <p style="color: #666; font-style: italic; margin: 10px 0 0 0;">👉 Ejemplo: "Tienes 3 objetos: cuerda, linterna y mapa roto. ¿Cuál usas primero y por qué?"</p>
+     </div>
+     <div class="skill-box">
+      <h3>🎨 Creatividad</h3>
+      <p style="color: #333; margin: 0;">Inventan soluciones o historias.</p>
+      <p style="color: #666; font-style: italic; margin: 10px 0 0 0;">👉 Ejemplo: "Crea un personaje que pueda sobrevivir en ese mundo"</p>
+     </div>
+     <div class="skill-box">
+      <h3>🔍 Metacognición</h3>
+      <p style="color: #333; margin: 0;">Reflexionan sobre su desempeño.</p>
+      <p style="color: #666; font-style: italic; margin: 10px 0 0 0;">👉 Preguntas:<br>
+        ¿Qué hicimos bien?<br>
+        ¿Qué podríamos mejorar?<br>
+        ¿Qué estrategia usamos?</p>
+     </div>
+    </div>
+    <div style="margin-bottom: 30px;">
+     <h2 class="section-title">🧠 REFLEXIÓN FINAL</h2>
+     <p style="color: #333; font-size: 16px; line-height: 1.8;">Al terminar el juego, los estudiantes responden:</p>
+     <ul style="color: #333; font-size: 16px; line-height: 1.8;">
+      <li><strong>Lo más difícil fue:</strong> __________</li>
+      <li><strong>Nuestra mejor estrategia fue:</strong> __________</li>
+      <li><strong>Mejoraríamos:</strong> __________</li>
+     </ul>
+    </div>
+    <div class="reflection-box">
+     <p style="margin: 0;">💬 "Este juego demuestra que aprender jugando permite desarrollar habilidades superiores porque no solo respondemos, sino que pensamos, creamos y reflexionamos sobre nuestro propio aprendizaje."</p>
+    </div>
+    <div style="text-align: center;">
+     <button id="simulationBtn" class="btn-primary"> ▶️ VER SIMULACIÓN DEL JUEGO </button>
+    </div>
+   </div>
+   <div id="simulationContainer" style="display: none;" class="simulation-container">
+    <div class="game-header">
+     <button id="closeSimulation" class="close-btn">✕ Cerrar</button>
+     <h2 style="color: #ff006e; font-size: 28px; margin: 0; clear: both; font-weight: 800;">🎮 SIMULACIÓN: LA MISIÓN DEL MUNDO PERDIDO</h2>
+    </div><!-- PANTALLA INTRO -->
+    <div id="introScreen" style="background: linear-gradient(135deg, #1a472a 0%, #2d5f3f 100%); padding: 60px 30px; border-radius: 20px; text-align: center; margin-bottom: 20px; color: white;">
+     <div style="font-size: 80px; margin-bottom: 20px; animation: pulse 1.5s infinite;">
+      🌍
+     </div>
+     <h2 style="color: #ffd700; font-size: 32px; margin: 0 0 20px 0; font-weight: 800;">Has Llegado al Mundo Perdido</h2>
+     <p style="font-size: 18px; line-height: 1.8; margin-bottom: 30px; color: #e0e0e0;">Para encontrar el tesoro, deberás superar desafíos mentales que pondrán a prueba tu creatividad, lógica y reflexión.</p><button onclick="startMission()" class="btn-primary" style="font-size: 20px; padding: 18px 50px;">🚀 INICIAR MISIÓN</button>
+    </div><!-- PANTALLA DE NIVELES -->
+    <div id="gameBoard" style="background: #f0f0f0; padding: 30px; border-radius: 10px; margin-bottom: 20px; display: none;">
+     <!-- BARRA DE PROGRESO -->
+     <div style="margin-bottom: 30px; text-align: center;">
+      <div style="background: #ddd; height: 10px; border-radius: 10px; overflow: hidden; margin-bottom: 10px;">
+       <div id="progressBar" style="background: linear-gradient(90deg, #ff006e, #d60055); height: 100%; width: 0%; transition: width 0.3s ease;"></div>
+      </div>
+      <p style="color: #666; font-weight: bold; margin: 0;" id="levelInfo">Nivel 1 de 4</p>
+     </div><!-- NIVEL 1: LENGUAJE EXPRESIVO -->
+     <div id="level1" class="challenge-box" style="display: none;">
+      <div style="font-size: 14px; color: #ff006e; font-weight: bold; margin-bottom: 15px;">
+       🗣️ NIVEL 1: LENGUAJE EXPRESIVO
+      </div>
+      <h3 class="challenge-title">El Bosque Misterioso</h3>
+      <p style="color: #1a1a2e; font-size: 16px; margin-bottom: 20px; font-weight: 600;">📍 Escenario: Te encuentras en un lugar lleno de árboles, sonidos extraños y neblina.</p>
+      <p class="challenge-text">Describe el lugar donde estás sin usar la palabra "BOSQUE"</p>
+      <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+       <textarea id="response1" placeholder="Escribe tu descripción aquí..." style="min-height: 100px;"></textarea>
+      </div><button onclick="checkLevel1()" class="btn-attempt" style="width: 100%;">✓ ENVIAR RESPUESTA</button>
+     </div><!-- NIVEL 2: PENSAMIENTO LÓGICO -->
+     <div id="level2" class="challenge-box" style="display: none;">
+      <div style="font-size: 14px; color: #ff006e; font-weight: bold; margin-bottom: 15px;">
+       🧠 NIVEL 2: PENSAMIENTO LÓGICO
+      </div>
+      <h3 class="challenge-title">La Cueva de Decisiones</h3>
+      <p style="color: #1a1a2e; font-size: 16px; margin-bottom: 20px; font-weight: 600;">📍 Escenario: Llegas a una cueva oscura. Debes elegir cómo avanzar.</p>
+      <p class="challenge-text">¿Cuál es la mejor estrategia?</p>
+      <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
+       <button onclick="checkLevel2(1)" style="background: white; border: 2px solid #ff006e; padding: 15px; border-radius: 10px; cursor: pointer; font-size: 16px; text-align: left; transition: all 0.3s ease;" onmouseover="this.style.background='#ffe8f0'" onmouseout="this.style.background='white'"> ❌ Entrar sin luz </button> <button onclick="checkLevel2(2)" style="background: white; border: 2px solid #ff006e; padding: 15px; border-radius: 10px; cursor: pointer; font-size: 16px; text-align: left; transition: all 0.3s ease;" onmouseover="this.style.background='#ffe8f0'" onmouseout="this.style.background='white'"> ✓ Buscar una fuente de luz primero (antorcha, linterna) </button> <button onclick="checkLevel2(3)" style="background: white; border: 2px solid #ff006e; padding: 15px; border-radius: 10px; cursor: pointer; font-size: 16px; text-align: left; transition: all 0.3s ease;" onmouseover="this.style.background='#ffe8f0'" onmouseout="this.style.background='white'"> ❌ Esperar en la entrada </button>
+      </div>
+      <div id="level2Feedback" style="display: none; background: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 5px solid #ff006e;">
+       <p id="level2Message" style="color: #333; margin: 0; font-weight: 600;"></p>
+      </div><button id="level2ContinueBtn" onclick="goToLevel3()" class="btn-attempt" style="width: 100%; display: none;">→ CONTINUAR</button>
+     </div><!-- NIVEL 3: CREATIVIDAD -->
+     <div id="level3" class="challenge-box" style="display: none;">
+      <div style="font-size: 14px; color: #ff006e; font-weight: bold; margin-bottom: 15px;">
+       🎨 NIVEL 3: CREATIVIDAD
+      </div>
+      <h3 class="challenge-title">El Río Imposible</h3>
+      <p style="color: #1a1a2e; font-size: 16px; margin-bottom: 20px; font-weight: 600;">📍 Escenario: Encuentras un río caudaloso que bloquea tu camino.</p>
+      <p class="challenge-text">Inventa una forma creativa de cruzar el río usando objetos imaginarios</p>
+      <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+       <textarea id="response3" placeholder="Describe tu idea creativa aquí..." style="min-height: 100px;"></textarea>
+      </div><button onclick="checkLevel3()" class="btn-attempt" style="width: 100%;">✓ ENVIAR RESPUESTA</button>
+     </div><!-- NIVEL 4: METACOGNICIÓN -->
+     <div id="level4" class="challenge-box" style="display: none;">
+      <div style="font-size: 14px; color: #ff006e; font-weight: bold; margin-bottom: 15px;">
+       🔍 NIVEL 4: METACOGNICIÓN
+      </div>
+      <h3 class="challenge-title">El Templo Final - Reflexión</h3>
+      <p style="color: #1a1a2e; font-size: 16px; margin-bottom: 20px; font-weight: 600;">📍 Escenario: Llegas al templo donde reposa el tesoro del conocimiento.</p>
+      <p class="challenge-text" style="margin-bottom: 25px;">Para obtener el tesoro, debes responder con honestidad:</p>
+      <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+       <label style="display: block; margin-bottom: 15px;"> <p style="color: #333; font-weight: 700; margin: 0 0 8px 0;">1️⃣ ¿Qué estrategia utilizaste para resolver los desafíos?</p><textarea id="response4a" placeholder="Tu respuesta..." style="min-height: 80px;"></textarea> </label> <label style="display: block; margin-bottom: 15px;"> <p style="color: #333; font-weight: 700; margin: 0 0 8px 0;">2️⃣ ¿Qué hiciste cuando algo no salió como esperabas?</p><textarea id="response4b" placeholder="Tu respuesta..." style="min-height: 80px;"></textarea> </label> <label style="display: block; margin-bottom: 0;"> <p style="color: #333; font-weight: 700; margin: 0 0 8px 0;">3️⃣ ¿Qué mejorarías en tu enfoque?</p><textarea id="response4c" placeholder="Tu respuesta..." style="min-height: 80px;"></textarea> </label>
+      </div><button onclick="checkLevel4()" class="btn-attempt" style="width: 100%;">✓ OBTENER TESORO</button>
+     </div><!-- PANTALLA DE RESULTADO/ERROR -->
+     <div id="resultBox" class="result-box" style="display: none; margin-bottom: 20px;">
+      <div id="resultMessage" class="result-message"></div>
+     </div><!-- PANTALLA FINAL -->
+     <div id="finalScreen" style="display: none; background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); padding: 50px 30px; border-radius: 20px; border: 3px solid #ff006e; text-align: center;">
+      <div style="font-size: 100px; margin-bottom: 20px; animation: pulse 1s infinite;">
+       🏆
+      </div>
+      <h2 style="color: #ff006e; font-size: 36px; margin: 0 0 15px 0; font-weight: 800;">¡MISIÓN COMPLETADA!</h2>
+      <p style="color: #1a1a2e; font-size: 20px; line-height: 1.8; margin-bottom: 30px; font-weight: 600;">🎉 ¡Has encontrado el tesoro del conocimiento!<br><span style="font-size: 16px;">Demostraste que aprender jugando permite desarrollar habilidades reales: pensaste, creaste y reflexionaste sobre tu propio aprendizaje.</span></p><button onclick="resetGame()" class="btn-replay">🔄 JUGAR DE NUEVO</button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+   let currentLevel = 0;
+
+   document.getElementById('simulationBtn').addEventListener('click', function() {
+    document.getElementById('simulationContainer').style.display = 'block';
+    document.getElementById('simulationBtn').style.display = 'none';
+   });
+
+   document.getElementById('closeSimulation').addEventListener('click', function() {
+    document.getElementById('simulationContainer').style.display = 'none';
+    document.getElementById('simulationBtn').style.display = 'block';
+   });
+
+   function startMission() {
+    document.getElementById('introScreen').style.display = 'none';
+    document.getElementById('gameBoard').style.display = 'block';
+    document.getElementById('level1').style.display = 'block';
+    currentLevel = 1;
+   }
+
+   function updateProgressBar() {
+    const progress = (currentLevel / 4) * 100;
+    document.getElementById('progressBar').style.width = progress + '%';
+    document.getElementById('levelInfo').textContent = 'Nivel ' + currentLevel + ' de 4';
+   }
+
+   function checkLevel1() {
+    const response = document.getElementById('response1').value.trim();
+    
+    if (!response) {
+     alert('Por favor, escribe una descripción');
+     return;
+    }
+
+    document.getElementById('resultBox').style.display = 'block';
+    document.getElementById('resultMessage').innerHTML = '✓ <span style="color: #155724;">¡Excelente! Describiste el lugar sin usar la palabra "bosque". Avanzas hacia el siguiente desafío.</span>';
+    document.getElementById('resultMessage').className = 'result-message result-success';
+
+    setTimeout(function() {
+     document.getElementById('level1').style.display = 'none';
+     document.getElementById('resultBox').style.display = 'none';
+     document.getElementById('level2').style.display = 'block';
+     currentLevel = 2;
+     updateProgressBar();
+    }, 1500);
+   }
+
+   function checkLevel2(option) {
+    document.getElementById('level2Feedback').style.display = 'block';
+    document.getElementById('level2ContinueBtn').style.display = 'block';
+
+    if (option === 2) {
+     document.getElementById('level2Message').textContent = '✓ ¡Correcto! La mejor estrategia es buscar luz primero. Esto demuestra pensamiento lógico y seguridad.';
+     document.getElementById('level2Feedback').style.borderLeftColor = '#4CAF50';
+    } else {
+     document.getElementById('level2Message').textContent = '✗ Esa no fue la mejor decisión. La respuesta correcta es buscar una fuente de luz primero. Esto demuestra pensamiento estratégico ante desafíos.';
+     document.getElementById('level2Feedback').style.borderLeftColor = '#ff6b6b';
+    }
+   }
+
+   function goToLevel3() {
+    document.getElementById('level2').style.display = 'none';
+    document.getElementById('level3').style.display = 'block';
+    currentLevel = 3;
+    updateProgressBar();
+   }
+
+   function checkLevel3() {
+    const response = document.getElementById('response3').value.trim();
+    
+    if (!response) {
+     alert('Por favor, escribe una idea creativa');
+     return;
+    }
+
+    document.getElementById('resultBox').style.display = 'block';
+    document.getElementById('resultMessage').innerHTML = '✓ <span style="color: #155724;">¡Muy creativo! Encontraste una solución imaginativa. Tu creatividad te ayuda a avanzar.</span>';
+    document.getElementById('resultMessage').className = 'result-message result-success';
+
+    setTimeout(function() {
+     document.getElementById('level3').style.display = 'none';
+     document.getElementById('resultBox').style.display = 'none';
+     document.getElementById('level4').style.display = 'block';
+     currentLevel = 4;
+     updateProgressBar();
+    }, 1500);
+   }
+
+   function checkLevel4() {
+    const response1 = document.getElementById('response4a').value.trim();
+    const response2 = document.getElementById('response4b').value.trim();
+    const response3 = document.getElementById('response4c').value.trim();
+    
+    if (!response1 || !response2 || !response3) {
+     alert('Por favor, completa todas las respuestas de reflexión');
+     return;
+    }
+
+    document.getElementById('level4').style.display = 'none';
+    document.getElementById('gameBoard').style.display = 'none';
+    document.getElementById('finalScreen').style.display = 'block';
+    currentLevel = 4;
+    updateProgressBar();
+   }
+
+   function resetGame() {
+    currentLevel = 0;
+    document.getElementById('response1').value = '';
+    document.getElementById('response3').value = '';
+    document.getElementById('response4a').value = '';
+    document.getElementById('response4b').value = '';
+    document.getElementById('response4c').value = '';
+    document.getElementById('level2Feedback').style.display = 'none';
+    document.getElementById('level2ContinueBtn').style.display = 'none';
+    document.getElementById('resultBox').style.display = 'none';
+    document.getElementById('finalScreen').style.display = 'none';
+    document.getElementById('gameBoard').style.display = 'none';
+    document.getElementById('introScreen').style.display = 'block';
+    document.getElementById('progressBar').style.width = '0%';
+    document.getElementById('levelInfo').textContent = 'Nivel 1 de 4';
+   }
+
+   updateProgressBar();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ed7e079545d9519',t:'MTc3NjM5MTY1My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
