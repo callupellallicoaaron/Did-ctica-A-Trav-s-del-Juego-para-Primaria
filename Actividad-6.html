@@ -6,6 +6,37 @@
   <title>Avance de portafolio 1</title>
   <script src="/_sdk/element_sdk.js"></script>
   <style>
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
         html, body {
             height: 100%;
             width: 100%;
@@ -158,7 +189,8 @@
  </head>
  <body>
   <div class="portada">
-   <div class="portada-container"><img src="https://proveedoresutp.utp.edu.pe/img/logo-utp.d277c146.png" alt="Logo UTP" loading="lazy" onerror="console.error('Logo failed to load:', this.src); this.outerHTML='<div class=\'logo\'>UTP</div>';" style="width: 110px; height: 110px; object-fit: contain; flex-shrink: 0;">
+   <div class="portada-container">
+    <img src="https://proveedoresutp.utp.edu.pe/img/logo-utp.d277c146.png" alt="Logo UTP" loading="lazy" onerror="console.error('Logo failed to load:', this.src); this.outerHTML='<div class=\'logo\'>UTP</div>';" style="width: 110px; height: 110px; object-fit: contain; flex-shrink: 0;">
     <div class="info-institucional">
      <h2 id="university-name">Universidad Tecnológica del Perú</h2>
      <p id="faculty">Facultad de Educación</p>
@@ -167,21 +199,20 @@
     </div>
     <div class="info-estudiante">
      <p><strong id="student-name">Adelina Arana Areche</strong></p>
-     <p><strong id="student-name">Aaron Sixto Callupe Llallico</strong></p>
-     <p><strong id="student-name">Estefany Yeraldin Inga Moreno</strong></p>
-     <p><strong id="student-name">Ruth Ester Sanchez Verastegui</strong></p>
+     <p><strong>Aaron Sixto Callupe Llallico</strong></p>
+     <p><strong>Estefany Yeraldin Inga Moreno</strong></p>
+     <p><strong>Ruth Ester Sanchez Verastegui</strong></p>
      <p id="student-career">Estudiantes de Educación Primaria</p>
      <p id="activity">Semana 6 - Avance de portafolio 1</p>
     </div>
    </div>
   </div>
   <div class="content-section" id="main-content">
-   <div style="margin-bottom: 60px;">
-    <!-- PORTAFOLIO 1 -->
+   <div style="margin-bottom: 60px;"><!-- PORTAFOLIO 1 -->
     <h1 style="color: #cc0000; font-size: 32px; margin-bottom: 40px; font-weight: bold; text-align: center;">🟣 PORTAFOLIO 1</h1><!-- SECCIÓN A: DATOS GENERALES -->
     <h3 style="color: #cc0000; font-size: 20px; margin-bottom: 25px; font-weight: bold; border-bottom: 2px solid #cc0000; padding-bottom: 10px;">📋 a. DATOS GENERALES</h3>
-
-    <div style="margin-bottom: 30px;"><!-- Card Estrategia -->
+    <div style="margin-bottom: 30px;">
+     <!-- Card Estrategia -->
      <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);">
       <p style="margin: 0 0 10px 0; font-size: 14px; color: #e0e0ff; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">🔍 Nombre de la estrategia</p>
       <p style="margin: 0; font-size: 18px; font-weight: bold; color: white;">Detectives del aprendizaje: resolviendo el misterio del texto perdido</p>
@@ -337,7 +368,56 @@
     </div>
     <div style="margin-bottom: 25px;">
      <h4 style="color: #333; font-size: 18px; margin-bottom: 12px; font-weight: bold;">📌 Problema a resolver</h4>
-     <p style="margin: 0; font-size: 16px; font-weight: bold; color: #cc0000;">👉 ¿Qué ocurrió con la gallina?</p>
+     <p style="margin: 0 0 15px 0; font-size: 16px; font-weight: bold; color: #cc0000;">👉 ¿Qué ocurrió con la gallina?</p><button id="btn-simulacion" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 15px 40px; font-size: 18px; font-weight: bold; border-radius: 10px; cursor: pointer; box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4); transition: all 0.3s ease; text-decoration: none; display: inline-block;">🎮 Ver Simulación Interactiva</button>
+    </div><!-- Modal de simulación -->
+    <div id="modal-simulacion" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 1000; overflow-auto;">
+     <div style="background: white; margin: 40px auto; max-width: 800px; border-radius: 15px; padding: 0; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);">
+      <!-- Encabezado del modal -->
+      <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 15px 15px 0 0; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1001;">
+       <h2 style="margin: 0; color: white; font-size: 28px;">🕵️ Detectives del Aprendizaje</h2><button id="btn-cerrar" style="background: white; border: none; font-size: 28px; cursor: pointer; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">✕</button>
+      </div><!-- Contenido del modal -->
+      <div style="padding: 30px; max-height: calc(100vh - 200px); overflow-y: auto; display: flex; flex-direction: column;" id="contenido-modal">
+       <div id="fase-inicial" style="display: block;">
+        <h3 style="color: #333; font-size: 24px; margin-bottom: 15px; text-align: center;">📖 El Caso: La Gallina Desaparecida</h3>
+        <div style="background: linear-gradient(135deg, #fff9e6 0%, #ffe6cc 100%); padding: 20px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid #ffc107;">
+         <p style="margin: 0; font-size: 16px; color: #333; line-height: 1.8;">En la granja de Don Carlos, hay una gallina muy especial llamada <strong>Rosita</strong>. Un día soleado, Rosita desapareció misteriosamente. ¿Dónde está? Tú eres el detective encargado de resolver este caso. Recibe 3 pistas y debes responder preguntas para descubrir qué pasó.</p>
+        </div><button id="btn-comenzar" style="background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%); color: white; border: none; padding: 15px 50px; font-size: 18px; font-weight: bold; border-radius: 10px; cursor: pointer; box-shadow: 0 6px 15px rgba(76, 175, 80, 0.4); transition: all 0.3s ease; width: 100%; text-align: center;">¡Comenzar Investigación! 🔍</button>
+       </div>
+       <div id="fase-pistas" style="display: none;">
+        <h3 style="color: #333; font-size: 22px; margin-bottom: 20px; text-align: center; animation: slideUp 0.5s ease;">📋 Analiza las Pistas</h3><!-- Barra de progreso -->
+        <div style="background: #f0f0f0; height: 10px; border-radius: 5px; margin-bottom: 25px; overflow: hidden;">
+         <div id="progreso-barra" style="background: linear-gradient(90deg, #667eea 0%, #764ba2 100%); height: 100%; width: 0%; transition: width 0.5s ease; border-radius: 5px;"></div>
+        </div>
+        <div style="text-align: center; margin-bottom: 20px; color: #666; font-size: 14px;"><span id="progreso-texto">Pista 1 de 3</span>
+        </div>
+        <div id="contenedor-pistas" style="margin-bottom: 25px;"></div>
+        <div id="preguntas-fase" style="background: #f0f8ff; padding: 20px; border-radius: 10px; border-left: 5px solid #0066cc; margin-bottom: 25px;"></div><!-- Botones de navegación -->
+        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 20px;"><button id="btn-anterior-pista" style="background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%); color: white; border: none; padding: 12px 30px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; display: none;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">⬅ Pista Anterior</button> <button id="btn-siguiente-pista" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 12px 30px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-right: 10px; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">Siguiente Pista ➜</button> <button id="btn-resolver" style="background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%); color: white; border: none; padding: 12px 30px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; display: none;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">Resolver el Caso 🎯</button>
+        </div>
+       </div>
+       <div id="fase-resolucion" style="display: none; text-align: center;">
+        <div style="margin-bottom: 30px;">
+         <div style="font-size: 80px; margin-bottom: 20px;">
+          🎉
+         </div>
+         <h3 style="color: #4caf50; font-size: 28px; margin-bottom: 15px;">¡Caso Resuelto!</h3>
+         <div style="background: #e8f5e9; padding: 25px; border-radius: 10px; border-left: 5px solid #4caf50; margin-bottom: 20px;">
+          <p style="margin: 0 0 15px 0; font-size: 18px; color: #333; font-weight: bold;">La Verdad sobre Rosita:</p>
+          <p style="margin: 0; font-size: 16px; color: #555; line-height: 1.8;">Rosita no desapareció. Ella voló hacia el corral del vecino porque escuchó a otros pollitos jugando. Don Carlos la encontró allá y la trajo de vuelta. ¡Rosita estaba de aventura! 🐔</p>
+         </div>
+         <div style="background: #fff3cd; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+          <p style="margin: 0 0 12px 0; font-size: 16px; font-weight: bold; color: #333;">✓ Competencias desarrolladas:</p>
+          <ul style="margin: 0; font-size: 15px; color: #555; list-style: none; padding: 0;">
+           <li style="margin: 8px 0;">✓ Obtuviste información explícita del texto</li>
+           <li style="margin: 8px 0;">✓ Realizaste inferencias</li>
+           <li style="margin: 8px 0;">✓ Reflexionaste sobre el contenido</li>
+           <li style="margin: 8px 0;">✓ Argumentaste tu respuesta</li>
+          </ul>
+         </div><button id="btn-reiniciar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 12px 40px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;">Jugar de Nuevo 🔄</button>
+        </div>
+       </div>
+      </div>
+     </div>
     </div>
     <div style="margin-bottom: 25px;">
      <h4 style="color: #333; font-size: 18px; margin-bottom: 12px; font-weight: bold;">📌 Resultados observados</h4>
@@ -369,12 +449,266 @@
    </div>
   </div>
   <script>
+        // Datos de las pistas y preguntas
+        const pistas = [
+            {
+                numero: 1,
+                titulo: "🔑 Primera Pista: Evidencia en la Granja",
+                contenido: "Se encontraron plumas rojas y blancas cerca de la cerca. Las plumas de Rosita son de estos colores. La cerca tiene un pequeño agujero.",
+                preguntas: [
+                    {
+                        texto: "¿Qué encontraron los detectives?",
+                        opciones: ["Plumas rojas y blancas", "Comida de gallina", "Un huevo"],
+                        correcta: 0
+                    },
+                    {
+                        texto: "¿Qué significa el agujero en la cerca?",
+                        opciones: ["Es muy viejo", "Rosita pudo haber pasado por allá", "No significa nada"],
+                        correcta: 1
+                    }
+                ]
+            },
+            {
+                numero: 2,
+                titulo: "🔑 Segunda Pista: Testigos",
+                contenido: "El perro de la granja ladró hacia el corral del vecino toda la mañana. Los pollitos del vecino estaban jugando cerca de la cerca. Escuchamos sonidos de gallinas jugando.",
+                preguntas: [
+                    {
+                        texto: "¿Hacía dónde ladró el perro?",
+                        opciones: ["Al bosque", "Al corral del vecino", "A la casa"],
+                        correcta: 1
+                    },
+                    {
+                        texto: "¿Qué estaban haciendo los pollitos?",
+                        opciones: ["Durmiendo", "Comiendo", "Jugando cerca de la cerca"],
+                        correcta: 2
+                    }
+                ]
+            },
+            {
+                numero: 3,
+                titulo: "🔑 Tercera Pista: Conclusión",
+                contenido: "Don Carlos encontró a Rosita en el corral del vecino jugando con los otros pollitos. Rosita estaba feliz y no tenía heridas. Ella voló de regreso cuando la llamaron.",
+                preguntas: [
+                    {
+                        texto: "¿Dónde encontraron a Rosita?",
+                        opciones: ["En el bosque", "En el corral del vecino", "En la casa"],
+                        correcta: 1
+                    },
+                    {
+                        texto: "¿Cómo regresó Rosita?",
+                        opciones: ["Caminando", "Volando", "En una canasta"],
+                        correcta: 1
+                    }
+                ]
+            }
+        ];
+
+        let pistaActual = 0;
+        let respuestasCorrectas = 0;
+
+        function mostrarModal() {
+            document.getElementById('modal-simulacion').style.display = 'block';
+            pistaActual = 0;
+            respuestasCorrectas = 0;
+        }
+
+        function cerrarModal() {
+            document.getElementById('modal-simulacion').style.display = 'none';
+            document.getElementById('fase-inicial').style.display = 'block';
+            document.getElementById('fase-pistas').style.display = 'none';
+            document.getElementById('fase-resolucion').style.display = 'none';
+        }
+
+        function comenzarJuego() {
+            document.getElementById('fase-inicial').style.display = 'none';
+            document.getElementById('fase-pistas').style.display = 'block';
+            pistaActual = 0;
+            mostrarPista(0);
+        }
+
+        function actualizarProgreso() {
+            const totalPistas = pistas.length;
+            const porcentaje = ((pistaActual + 1) / totalPistas) * 100;
+            document.getElementById('progreso-barra').style.width = porcentaje + '%';
+            document.getElementById('progreso-texto').textContent = `Pista ${pistaActual + 1} de ${totalPistas}`;
+        }
+
+        function mostrarPista(indice) {
+            pistaActual = indice;
+            actualizarProgreso();
+
+            const pista = pistas[indice];
+            const contenedor = document.getElementById('contenedor-pistas');
+            const preguntasDiv = document.getElementById('preguntas-fase');
+            const modalContenido = document.getElementById('contenido-modal');
+
+            contenedor.innerHTML = '';
+            preguntasDiv.innerHTML = '';
+
+            // Mostrar pista con animación
+            contenedor.innerHTML = `
+                <div style="background: linear-gradient(135deg, #fff3cd 0%, #ffe6b3 100%); padding: 20px; border-radius: 10px; border-left: 5px solid #ffc107; margin-bottom: 20px; animation: slideIn 0.5s ease;">
+                    <div style="font-size: 24px; margin-bottom: 10px; text-align: center;">${pista.titulo}</div>
+                    <p style="margin: 0; font-size: 16px; color: #333; line-height: 1.8;">${pista.contenido}</p>
+                    <div style="margin-top: 15px; font-size: 14px; color: #666; background: rgba(255, 255, 255, 0.6); padding: 10px; border-radius: 5px; text-align: center;">
+                        Pista ${indice + 1} de ${pistas.length}
+                    </div>
+                </div>
+            `;
+
+            // Mostrar preguntas
+            preguntasDiv.innerHTML = '<p style="margin: 0 0 15px 0; font-weight: bold; color: #0066cc; font-size: 16px;">Responde estas preguntas:</p>';
+            
+            pista.preguntas.forEach((pregunta, idx) => {
+                const preguntaDiv = document.createElement('div');
+                preguntaDiv.style.cssText = 'margin-bottom: 15px; padding: 15px; background: white; border-radius: 8px; border: 2px solid #e0e0e0; animation: slideIn 0.5s ease;';
+                preguntaDiv.style.animationDelay = `${idx * 0.1}s`;
+                
+                let opcionesHTML = `<p style="margin: 0 0 12px 0; font-weight: bold; color: #333; font-size: 15px;">${idx + 1}. ${pregunta.texto}</p>`;
+                
+                pregunta.opciones.forEach((opcion, optIdx) => {
+                    opcionesHTML += `
+                        <label style="display: block; margin: 8px 0; cursor: pointer; padding: 10px; border-radius: 5px; transition: all 0.3s ease; font-size: 15px;" 
+                               onmouseover="this.style.background='#f0f8ff'; this.style.transform='translateX(5px)'" 
+                               onmouseout="this.style.background='transparent'; this.style.transform='translateX(0)'">
+                            <input type="radio" name="preg-${indice}-${idx}" value="${optIdx}" style="margin-right: 10px; cursor: pointer; width: 16px; height: 16px;">
+                            <span style="font-size: 15px;">${opcion}</span>
+                        </label>
+                    `;
+                });
+                
+                preguntaDiv.innerHTML = opcionesHTML;
+                preguntasDiv.appendChild(preguntaDiv);
+            });
+
+            // Scroll suave al contenido
+            setTimeout(() => {
+                modalContenido.scrollTop = 0;
+            }, 50);
+
+            // Actualizar botones
+            const btnSiguiente = document.getElementById('btn-siguiente-pista');
+            const btnResolver = document.getElementById('btn-resolver');
+            const btnAnterior = document.getElementById('btn-anterior-pista');
+
+            // Mostrar/ocultar botón anterior
+            if (indice > 0) {
+                btnAnterior.style.display = 'inline-block';
+                btnAnterior.onclick = () => mostrarPista(indice - 1);
+            } else {
+                btnAnterior.style.display = 'none';
+            }
+
+            if (indice < pistas.length - 1) {
+                btnSiguiente.style.display = 'inline-block';
+                btnResolver.style.display = 'none';
+                btnSiguiente.onclick = () => verificarYSiguiente(indice);
+            } else {
+                btnSiguiente.style.display = 'none';
+                btnResolver.style.display = 'inline-block';
+                btnResolver.onclick = () => verificarYResolver(indice);
+            }
+        }
+
+        function verificarYSiguiente(indice) {
+            const pista = pistas[indice];
+            let respuestasValidas = 0;
+            let todasCorrectas = true;
+
+            pista.preguntas.forEach((pregunta, idx) => {
+                const respuesta = document.querySelector(`input[name="preg-${indice}-${idx}"]:checked`);
+                if (respuesta) {
+                    respuestasValidas++;
+                    if (parseInt(respuesta.value) === pregunta.correcta) {
+                        respuestasCorrectas++;
+                    } else {
+                        todasCorrectas = false;
+                    }
+                } else {
+                    todasCorrectas = false;
+                }
+            });
+
+            if (respuestasValidas === pista.preguntas.length && todasCorrectas) {
+                mostrarPista(indice + 1);
+            } else {
+                mostrarError('⚠️ Revisa tus respuestas. Algunas no son correctas. ¡Intenta de nuevo!');
+            }
+        }
+
+        function verificarYResolver(indice) {
+            const pista = pistas[indice];
+            let respuestasValidas = 0;
+            let todasCorrectas = true;
+
+            pista.preguntas.forEach((pregunta, idx) => {
+                const respuesta = document.querySelector(`input[name="preg-${indice}-${idx}"]:checked`);
+                if (respuesta) {
+                    respuestasValidas++;
+                    if (parseInt(respuesta.value) === pregunta.correcta) {
+                        respuestasCorrectas++;
+                    } else {
+                        todasCorrectas = false;
+                    }
+                } else {
+                    todasCorrectas = false;
+                }
+            });
+
+            if (respuestasValidas === pista.preguntas.length && todasCorrectas) {
+                mostrarResolucion();
+            } else {
+                mostrarError('⚠️ Revisa tus respuestas. Algunas no son correctas. ¡Intenta de nuevo!');
+            }
+        }
+
+        function mostrarError(mensaje) {
+            const preguntasDiv = document.getElementById('preguntas-fase');
+            const errorDiv = document.createElement('div');
+            errorDiv.style.cssText = 'background: #ffebee; border: 2px solid #f44336; color: #c62828; padding: 15px; border-radius: 8px; margin-top: 15px; font-size: 15px; animation: slideUp 0.3s ease;';
+            errorDiv.textContent = mensaje;
+            
+            // Remover error anterior si existe
+            const errorAnterior = preguntasDiv.querySelector('[style*="ffebee"]');
+            if (errorAnterior) {
+                errorAnterior.remove();
+            }
+            
+            preguntasDiv.appendChild(errorDiv);
+        }
+
+        function mostrarResolucion() {
+            document.getElementById('fase-pistas').style.display = 'none';
+            document.getElementById('fase-resolucion').style.display = 'block';
+        }
+
+        function reiniciarJuego() {
+            pistaActual = 0;
+            respuestasCorrectas = 0;
+            document.getElementById('fase-resolucion').style.display = 'none';
+            document.getElementById('fase-inicial').style.display = 'block';
+        }
+
+        // Event listeners
+        document.getElementById('btn-simulacion').addEventListener('click', mostrarModal);
+        document.getElementById('btn-cerrar').addEventListener('click', cerrarModal);
+        document.getElementById('btn-comenzar').addEventListener('click', comenzarJuego);
+        document.getElementById('btn-reiniciar').addEventListener('click', reiniciarJuego);
+
+        // Cerrar modal al hacer click fuera
+        document.getElementById('modal-simulacion').addEventListener('click', function(e) {
+            if (e.target === this) {
+                cerrarModal();
+            }
+        });
+
         const defaultConfig = {
             university_name: 'Universidad Tecnológica del Perú',
             faculty: 'Facultad de Educación',
             course: 'Didáctica A Través del Juego para Primaria',
             section: 'Sección 43872',
-            student_name: 'Aaron Sixto Callupe Llallico',
+            student_name: 'Adelina Arana Areche',
             student_career: 'Estudiantes de Educación Primaria',
             activity: 'Semana 6 - Avance de portafolio 1'
         };
@@ -415,5 +749,5 @@
             window.elementSdk.init(element);
         }
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f4b2298411dc2c1',t:'MTc3NzYwMDIyNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f4b8cad674bc2c1',t:'MTc3NzYwNDU2OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
