@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Carrera Matemática del Tesoro - 3° Primaria</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Quicksand:wght@400;700&family=Libre+Baskerville:wght@400;700&display=swap');
+
+        :root {
+            --wood: #8b4513;
+            --wood-light: #d2b48c;
+            --sand: #f3e5ab;
+            --utp-red: #ff0000;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: #2c3e50;
+            background-image: radial-gradient(#34495e 20%, transparent 20%), radial-gradient(#34495e 20%, transparent 20%);
+            background-position: 0 0, 50px 50px;
+            background-size: 100px 100px;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Estilos Portada */
+        .portada-container {
+            font-family: 'Libre Baskerville', serif;
+        }
+        .utp-logo-placeholder {
+            background-color: var(--utp-red);
+            color: white;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            padding: 10px;
+            display: inline-flex;
+            gap: 5px;
+        }
+        .utp-logo-placeholder span {
+            background: black;
+            padding: 5px 10px;
+        }
+
+        /* Estilos Juego Originales */
+        .luckiest { font-family: 'Luckiest Guy', cursive; }
+        
+        h1, h2, h3 {
+            letter-spacing: 1px;
+        }
+
+        .map-container {
+            background: var(--sand);
+            background-image: url('https://www.transparenttextures.com/patterns/old-map.png');
+            border: 15px solid #5d4037;
+            border-image: linear-gradient(to bottom, #8d6e63, #5d4037) 1;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 100px rgba(139, 69, 19, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .board-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (min-width: 768px) {
+            .board-grid {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 15px;
+                max-width: 600px;
+            }
+        }
+
+        .tile {
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #bcaa8c;
+            background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+            border: 3px solid #5d4037;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #3e2723;
+            position: relative;
+            box-shadow: 0 4px 0 #5d4037, 0 8px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .tile-active {
+            background: #ffd54f !important;
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 8px 0 #ff8f00, 0 15px 25px rgba(255, 143, 0, 0.4);
+            border-color: #ff8f00;
+            z-index: 20;
+        }
+
+        .tile-finish {
+            background: #ffc107;
+            border-color: #ff8f00;
+            animation: pulse-gold 2s infinite;
+        }
+
+        @keyframes pulse-gold {
+            0% { box-shadow: 0 4px 0 #5d4037, 0 0 0 0px rgba(255, 193, 7, 0.7); }
+            70% { box-shadow: 0 4px 0 #5d4037, 0 0 0 15px rgba(255, 193, 7, 0); }
+            100% { box-shadow: 0 4px 0 #5d4037, 0 0 0 0px rgba(255, 193, 7, 0); }
+        }
+
+        .player-token {
+            position: absolute;
+            font-size: 2.2rem;
+            z-index: 30;
+            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));
+            animation: bounce 0.6s infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+
+        .dice-box {
+            background: rgba(255,255,255,0.9);
+            border-radius: 20px;
+            border: 4px solid #3b82f6;
+            box-shadow: 0 10px 0 #1d4ed8;
+        }
+
+        .nav-tab {
+            cursor: pointer;
+            padding: 10px 20px;
+            font-weight: bold;
+            border-radius: 10px 10px 0 0;
+            transition: all 0.2s;
+        }
+
+        .nav-tab.active {
+            background: #fff;
+            color: #1e40af;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+        }
+
+        .island-decoration {
+            position: absolute;
+            opacity: 0.2;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body>
+
+    <!-- PORTADA INSTITUCIONAL -->
+    <div class="max-w-6xl mx-auto mb-8 mt-4">
+        <div class="bg-white p-8 md:p-12 rounded-3xl shadow-xl portada-container flex flex-col md:flex-row justify-between items-start border-b-8 border-red-600">
+            <div class="flex flex-col gap-6 w-full md:w-2/3">
+                <div class="utp-logo-placeholder self-start">
+                    <span>U</span><span>T</span><span>P</span>
+                </div>
+                <div>
+                    <h1 class="text-2xl md:text-4xl text-slate-800 font-bold mb-4">Universidad Tecnológica del Perú</h1>
+                    <div class="space-y-2 text-slate-600 text-lg md:text-xl">
+                        <p>Facultad de Educación</p>
+                        <p>Didáctica A Través del Juego para Primaria</p>
+                        <p>Sección 43872</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 md:mt-0 flex flex-col items-end w-full md:w-1/3 text-right">
+                <div class="space-y-1 mb-6">
+                    <p class="text-red-700 font-bold text-xl">Adelina Arana Areche</p>
+                    <p class="text-red-700 font-bold text-xl">Aaron Sixto Callupe Llallico</p>
+                    <p class="text-red-700 font-bold text-xl">Estefany Yeraldin Inga Moreno</p>
+                    <p class="text-red-700 font-bold text-xl">Ruth Ester Sanchez Verastegui</p>
+                </div>
+                <div class="text-slate-500 font-medium italic">
+                    <p>Estudiantes de Educación Primaria</p>
+                    <p>Semana 7 - Matriz de programacion curricular</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto md:py-8 px-2 md:px-4">
+        
+        <!-- Header & Nav -->
+        <div class="flex flex-col md:flex-row items-center justify-between mb-4 gap-4">
+            <h1 class="text-3xl md:text-5xl text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] text-center md:text-left uppercase luckiest">
+                ⚓ La carrera matemática del tesoro
+            </h1>
+            
+            <nav class="flex bg-slate-800/50 p-1 rounded-t-xl overflow-x-auto no-scrollbar w-full md:w-auto">
+                <div onclick="showSection('matrix')" id="tab-matrix" class="nav-tab active text-white">MATRIZ</div>
+                <div onclick="showSection('game')" id="tab-game" class="nav-tab text-white/70">JUEGO</div>
+                <div onclick="showSection('rubric')" id="tab-rubric" class="nav-tab text-white/70">RÚBRICA</div>
+            </nav>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-2xl overflow-hidden min-h-[600px]">
+            
+            <!-- 1. SECCIÓN MATRIZ CURRICULAR -->
+            <section id="sec-matrix" class="p-6 md:p-10 animate-fade-in">
+                <h2 class="text-3xl text-blue-900 mb-6 text-center uppercase border-b-4 border-blue-100 pb-2 luckiest">Elementos Curriculares</h2>
+                <div class="overflow-x-auto rounded-2xl border-2 border-slate-100 shadow-sm">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-800 text-white">
+                                <th class="p-4 uppercase tracking-wider border-r border-slate-700">Elementos Curriculares</th>
+                                <th class="p-4 uppercase tracking-wider">Desarrollo</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-700">
+                            <tr class="border-b"> 
+                                <td class="p-4 font-bold bg-slate-50 w-1/4">Área curricular</td>
+                                <td class="p-4">Matemática</td>
+                            </tr>
+                            <tr class="border-b"> 
+                                <td class="p-4 font-bold bg-slate-50">Grado</td>
+                                <td class="p-4">3° de primaria</td>
+                            </tr>
+                            <tr class="border-b"> 
+                                <td class="p-4 font-bold bg-slate-50">Competencia (CNEB)</td>
+                                <td class="p-4">Resuelve problemas de cantidad</td>
+                            </tr>
+                            <tr class="border-b"> 
+                                <td class="p-4 font-bold bg-slate-50">Capacidades</td>
+                                <td class="p-4">
+                                    <ul class="list-disc ml-4 space-y-1">
+                                        <li>Traduce cantidades a expresiones numéricas.</li>
+                                        <li>Comunica su comprensión sobre los números y las operaciones.</li>
+                                        <li>Usa estrategias y procedimientos de estimación y cálculo.</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr class="border-b"> 
+                                <td class="p-4 font-bold bg-slate-50">Desempeño</td>
+                                <td class="p-4">Resuelve problemas de adición y sustracción utilizando diversas estrategias durante actividades lúdicas digitales, explicando sus procedimientos y resultados.</td>
+                            </tr>
+                            <tr class="border-b"> 
+                                <td class="p-4 font-bold bg-slate-50">Actividad lúdica central</td>
+                                <td class="p-4 font-bold text-blue-600">“La carrera matemática del tesoro”</td>
+                            </tr>
+                            <tr class="border-b"> 
+                                <td class="p-4 font-bold bg-slate-50">Descripción de la actividad</td>
+                                <td class="p-4">Los estudiantes participan en un juego digital que simula un tablero interactivo de búsqueda del tesoro. Cada estudiante lanza un dado virtual y avanza casillas resolviendo problemas matemáticos relacionados con sumas y restas de máximo 2 cifras. Algunas casillas presentan retos adicionales, preguntas sorpresa o desafíos contrarreloj.</td>
+                            </tr>
+                            <tr class="border-b"> 
+                                <td class="p-4 font-bold bg-slate-50">Propósito de aprendizaje</td>
+                                <td class="p-4">Que los estudiantes desarrollen la resolución de problemas de cantidad mediante una actividad lúdica digital que favorezca el cálculo, el razonamiento y la participación activa.</td>
+                            </tr>
+                            <tr class="border-b"> 
+                                <td class="p-4 font-bold bg-slate-50">Evidencia de aprendizaje</td>
+                                <td class="p-4">Resuelve correctamente los problemas matemáticos planteados en el juego y explica las estrategias utilizadas durante la actividad.</td>
+                            </tr>
+                            <tr class="border-b"> 
+                                <td class="p-4 font-bold bg-slate-50">Instrumento de evaluación</td>
+                                <td class="p-4">Lista de cotejo y rúbrica de evaluación.</td>
+                            </tr>
+                            <tr class="border-b"> 
+                                <td class="p-4 font-bold bg-slate-50">Criterios de evaluación</td>
+                                <td class="p-4">
+                                    <ul class="list-disc ml-4 space-y-1">
+                                        <li>Resuelve correctamente las operaciones propuestas.</li>
+                                        <li>Explica el procedimiento utilizado.</li>
+                                        <li>Participa activamente durante el juego.</li>
+                                        <li>Utiliza adecuadamente el recurso digital.</li>
+                                        <li>Respeta las reglas establecidas.</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr> 
+                                <td class="p-4 font-bold bg-slate-50">Recursos y materiales</td>
+                                <td class="p-4">Computadoras o tablets, página web en HTML, proyector, fichas virtuales, dado digital y tablero interactivo.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 2. SECCIÓN DEL JUEGO -->
+            <section id="sec-game" class="hidden p-4 md:p-8">
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <div class="w-full lg:w-3/5 order-2 lg:order-1">
+                        <div class="map-container p-6 md:p-10 rounded-2xl relative">
+                            <i class="fas fa-anchor island-decoration text-6xl top-4 left-4"></i>
+                            <i class="fas fa-compass island-decoration text-8xl bottom-10 right-10"></i>
+                            <i class="fas fa-skull-crossbones island-decoration text-4xl top-1/2 left-1/4"></i>
+                            
+                            <div id="board" class="board-grid">
+                                <!-- JS -->
+                            </div>
+                            
+                            <div class="mt-6 flex justify-between items-center text-brown-900 font-bold px-2">
+                                <span class="bg-white/50 px-3 py-1 rounded-full border border-brown-300">🚩 INICIO</span>
+                                <span class="bg-yellow-400/50 px-3 py-1 rounded-full border border-yellow-600">🏆 EL TESORO</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w-full lg:w-2/5 flex flex-col items-center space-y-6 order-1 lg:order-2">
+                        <div class="dice-box p-8 w-full flex flex-col items-center">
+                            <div id="dice" class="w-20 h-20 md:w-24 md:h-24 bg-white border-4 border-slate-200 rounded-2xl shadow-inner flex items-center justify-center text-4xl md:text-5xl text-blue-600 cursor-pointer hover:rotate-12 transition-transform active:scale-90" onclick="rollDice()">
+                                <i class="fas fa-dice-d6"></i>
+                            </div>
+                            <p class="mt-4 font-black text-blue-900 uppercase tracking-widest text-lg">Lanzar Dado</p>
+                            <div id="status-msg" class="mt-2 text-blue-500 font-bold h-6 text-center">¡Prepárate para la aventura!</div>
+                        </div>
+
+                        <div class="bg-amber-50 p-6 rounded-2xl border-2 border-amber-200 w-full">
+                            <h3 class="text-amber-900 text-xl mb-3 flex items-center">
+                                <i class="fas fa-scroll mr-2"></i> REGLAS DEL PIRATA
+                            </h3>
+                            <ul class="space-y-3 text-amber-950 font-medium text-sm md:text-base">
+                                <li class="flex gap-3"><span class="bg-amber-200 w-6 h-6 flex items-center justify-center rounded-full shrink-0">1</span> Lanza el dado para moverte entre las islas.</li>
+                                <li class="flex gap-3"><span class="bg-amber-200 w-6 h-6 flex items-center justify-center rounded-full shrink-0">2</span> Resuelve sumas y restas de hasta 2 cifras.</li>
+                                <li class="flex gap-3"><span class="bg-amber-200 w-6 h-6 flex items-center justify-center rounded-full shrink-0">3</span> ¡Llega al diamante para ganar el tesoro!</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. SECCIÓN RÚBRICA -->
+            <section id="sec-rubric" class="hidden p-6 md:p-10">
+                <h2 class="text-3xl text-slate-800 mb-6 text-center uppercase border-b-4 border-slate-100 pb-2 luckiest">Rúbrica de Evaluación</h2>
+                <div class="overflow-x-auto shadow-md rounded-xl border border-slate-200">
+                    <table class="w-full text-[10px] md:text-xs lg:text-sm border-collapse text-left">
+                        <thead>
+                            <tr class="bg-slate-700 text-white">
+                                <th class="p-3 uppercase">CRITERIOS DE EVALUACIÓN</th>
+                                <th class="p-3 uppercase bg-red-600 text-center">INICIO</th>
+                                <th class="p-3 uppercase bg-orange-500 text-center">PROCESO</th>
+                                <th class="p-3 uppercase bg-blue-600 text-center">LOGRADO</th>
+                                <th class="p-3 uppercase bg-green-600 text-center">DESTACADO</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-700">
+                            <tr class="border-b">
+                                <td class="p-3 font-bold bg-slate-50 w-48">Resuelve correctamente las operaciones propuestas.</td>
+                                <td class="p-3 border-l border-r">Presenta muchas dificultades para resolver las operaciones matemáticas y requiere apoyo constante para completar los retos del juego.</td>
+                                <td class="p-3 border-l border-r">Resuelve algunas operaciones correctamente, aunque todavía comete errores frecuentes en los cálculos o necesita orientación ocasional.</td>
+                                <td class="p-3 border-l border-r">Resuelve correctamente la mayoría de las operaciones planteadas utilizando procedimientos adecuados.</td>
+                                <td class="p-3 border-l border-r">Resuelve todas las operaciones con precisión, rapidez y autonomía, utilizando diferentes estrategias de cálculo.</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3 font-bold bg-slate-50">Explica el procedimiento utilizado.</td>
+                                <td class="p-3 border-l border-r">Tiene dificultad para explicar cómo obtuvo sus respuestas y suele limitarse a mencionar solo el resultado.</td>
+                                <td class="p-3 border-l border-r">Explica parcialmente el procedimiento seguido, aunque sus ideas todavía son poco claras o incompletas.</td>
+                                <td class="p-3 border-l border-r">Explica de manera clara el procedimiento utilizado para resolver las operaciones matemáticas.</td>
+                                <td class="p-3 border-l border-r">Explica con claridad, seguridad y detalle cada procedimiento utilizando lenguaje matemático adecuado.</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3 font-bold bg-slate-50">Participa activamente durante el juego.</td>
+                                <td class="p-3 border-l border-r">Participa de manera limitada y requiere motivación constante para integrarse en la actividad.</td>
+                                <td class="p-3 border-l border-r">Participa en algunos momentos del juego, aunque ocasionalmente pierde interés o necesita recordatorios para continuar.</td>
+                                <td class="p-3 border-l border-r">Participa activamente durante el desarrollo del juego respetando turnos y dinámicas establecidas.</td>
+                                <td class="p-3 border-l border-r">Participa con entusiasmo durante toda la actividad y motiva a sus compañeros a involucrarse en el juego.</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3 font-bold bg-slate-50">Utiliza adecuadamente el recurso digital.</td>
+                                <td class="p-3 border-l border-r">Presenta dificultad para utilizar la plataforma digital y necesita ayuda frecuente para interactuar con el juego.</td>
+                                <td class="p-3 border-l border-r">Utiliza parcialmente el recurso digital, aunque todavía requiere apoyo en algunas funciones del juego.</td>
+                                <td class="p-3 border-l border-r">Utiliza correctamente la plataforma digital y navega adecuadamente durante la actividad.</td>
+                                <td class="p-3 border-l border-r">Utiliza el recurso digital con autonomía, rapidez y seguridad, aprovechando correctamente todas sus funciones.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold bg-slate-50">Respeta las reglas establecidas.</td>
+                                <td class="p-3 border-l border-r">Tiene dificultad para respetar las reglas del juego y requiere constantes recordatorios sobre el comportamiento esperado.</td>
+                                <td class="p-3 border-l border-r">Respeta algunas reglas, aunque ocasionalmente necesita orientación para mantener el orden durante la actividad.</td>
+                                <td class="p-3 border-l border-r">Respeta las reglas establecidas y mantiene una convivencia adecuada durante el juego.</td>
+                                <td class="p-3 border-l border-r">Respeta todas las reglas y promueve una convivencia positiva colaborando con sus compañeros durante la actividad.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- MODAL DE RETO -->
+    <div id="modal-challenge" class="fixed inset-0 hidden z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-white rounded-[40px] p-8 max-w-sm w-full text-center border-t-[12px] border-blue-500 shadow-2xl scale-95">
+            <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-calculator text-3xl text-blue-600"></i>
+            </div>
+            <h2 class="text-xl font-black text-slate-800 mb-2 uppercase">Reto de 2 Cifras</h2>
+            <p id="challenge-text" class="text-4xl font-bold text-blue-600 mb-6 tracking-tight"></p>
+            <input type="number" id="answer-input" class="w-full text-center text-5xl font-bold border-b-4 border-slate-100 p-2 mb-6 focus:border-blue-500 outline-none" placeholder="?">
+            <button onclick="checkAnswer()" class="w-full bg-blue-600 text-white font-black py-5 rounded-2xl text-xl shadow-lg hover:bg-blue-700 transition-all active:scale-95 uppercase">Resolver</button>
+            <p id="modal-feedback" class="mt-4 font-bold text-lg min-h-[28px]"></p>
+        </div>
+    </div>
+
+    <!-- MODAL DE VICTORIA -->
+    <div id="modal-win" class="fixed inset-0 hidden z-50 flex items-center justify-center p-4 bg-black/90">
+        <div class="bg-yellow-400 rounded-[50px] p-12 max-w-md w-full text-center shadow-[0_0_100px_rgba(255,255,0,0.3)] border-8 border-yellow-200">
+            <i class="fas fa-gem text-8xl text-white mb-6 drop-shadow-lg"></i>
+            <h2 class="text-5xl font-black text-yellow-900 mb-4 italic">¡COFRE ABIERTO!</h2>
+            <p class="text-xl text-yellow-800 font-bold mb-8">¡Lograste completar todos los retos de 2 cifras!</p>
+            <button onclick="resetGame()" class="w-full bg-white text-yellow-600 font-black py-5 rounded-3xl text-2xl shadow-xl hover:bg-yellow-50 active:scale-95 uppercase">Jugar otra vez</button>
+        </div>
+    </div>
+
+    <script>
+        let currentPos = 0;
+        const totalTiles = 20;
+        let currentProblem = { ans: 0 };
+        const playerToken = "🏴‍☠️";
+        const treasureToken = "💎";
+
+        function initBoard() {
+            const board = document.getElementById('board');
+            board.innerHTML = '';
+            for (let i = 1; i <= totalTiles; i++) {
+                const tile = document.createElement('div');
+                tile.id = `tile-${i}`;
+                tile.className = 'tile';
+                tile.innerText = i === totalTiles ? treasureToken : i;
+                if (i === totalTiles) tile.classList.add('tile-finish');
+                board.appendChild(tile);
+            }
+            updatePlayerPosition();
+        }
+
+        function showSection(section) {
+            document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active', 'text-white'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.add('text-white/70'));
+            
+            document.getElementById(`sec-${section}`).classList.remove('hidden');
+            const activeTab = document.getElementById(`tab-${section}`);
+            activeTab.classList.add('active', 'text-white');
+            activeTab.classList.remove('text-white/70');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function updatePlayerPosition() {
+            document.querySelectorAll('.player-token').forEach(t => t.remove());
+            document.querySelectorAll('.tile').forEach(t => t.classList.remove('tile-active'));
+            if (currentPos > 0) {
+                const targetTile = document.getElementById(`tile-${currentPos}`);
+                if (targetTile) {
+                    const token = document.createElement('div');
+                    token.className = 'player-token';
+                    token.innerText = playerToken;
+                    targetTile.appendChild(token);
+                    targetTile.classList.add('tile-active');
+                }
+            }
+        }
+
+        function rollDice() {
+            if (!document.getElementById('modal-challenge').classList.contains('hidden')) return;
+            const roll = Math.floor(Math.random() * 6) + 1;
+            const diceIcons = ['fa-dice-one', 'fa-dice-two', 'fa-dice-three', 'fa-dice-four', 'fa-dice-five', 'fa-dice-six'];
+            document.getElementById('dice').innerHTML = `<i class="fas ${diceIcons[roll-1]}"></i>`;
+            document.getElementById('status-msg').innerText = `¡Avanzas ${roll} islas!`;
+            let nextPos = currentPos + roll;
+            if (nextPos > totalTiles) nextPos = totalTiles;
+            setTimeout(() => generateChallenge(nextPos), 600);
+        }
+
+        function generateChallenge(nextPos) {
+            let n1, n2;
+            const isAddition = Math.random() > 0.5;
+            
+            if (isAddition) {
+                n1 = Math.floor(Math.random() * 80) + 10; 
+                n2 = Math.floor(Math.random() * (99 - n1)) + 1;
+                if (n2 < 10 && n1 < 90) n2 = 10;
+                currentProblem = { q: `${n1} + ${n2}`, ans: n1 + n2, next: nextPos };
+            } else {
+                n1 = Math.floor(Math.random() * 80) + 20; 
+                n2 = Math.floor(Math.random() * (n1 - 10)) + 10;
+                currentProblem = { q: `${n1} - ${n2}`, ans: n1 - n2, next: nextPos };
+            }
+            
+            document.getElementById('challenge-text').innerText = currentProblem.q;
+            document.getElementById('modal-challenge').classList.remove('hidden');
+            document.getElementById('answer-input').value = '';
+            document.getElementById('modal-feedback').innerText = '';
+            setTimeout(() => document.getElementById('answer-input').focus(), 100);
+        }
+
+        function checkAnswer() {
+            const val = parseInt(document.getElementById('answer-input').value);
+            const feedback = document.getElementById('modal-feedback');
+            if (val === currentProblem.ans) {
+                feedback.innerText = "¡RESPUESTA CORRECTA! 🚢";
+                feedback.className = "mt-4 font-bold text-green-600";
+                setTimeout(() => {
+                    currentPos = currentProblem.next;
+                    updatePlayerPosition();
+                    document.getElementById('modal-challenge').classList.add('hidden');
+                    if (currentPos === totalTiles) document.getElementById('modal-win').classList.remove('hidden');
+                }, 800);
+            } else {
+                feedback.innerText = "¡Error! Te quedas en tu isla.";
+                feedback.className = "mt-4 font-bold text-red-600";
+                setTimeout(() => document.getElementById('modal-challenge').classList.add('hidden'), 1200);
+            }
+        }
+
+        function resetGame() {
+            currentPos = 0;
+            document.getElementById('modal-win').classList.add('hidden');
+            document.getElementById('status-msg').innerText = "¡Nueva partida iniciada!";
+            initBoard();
+        }
+
+        document.getElementById('answer-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') checkAnswer();
+        });
+
+        window.onload = initBoard;
+    </script>
+</body>
+</html>
