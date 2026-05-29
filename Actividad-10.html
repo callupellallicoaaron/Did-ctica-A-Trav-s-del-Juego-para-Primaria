@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Ecológico: Exploradores de la Selva</title>
+    <style>
+        :root {
+            --primary: #2e7d32;
+            --primary-light: #4caf50;
+            --accent: #ff9800;
+            --background: #f1f8e9;
+            --text: #1b5e20;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .game-container {
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            border: 4px solid var(--primary-light);
+        }
+
+        .mission-box {
+            background: #e8f5e9;
+            border-left: 5px solid var(--accent);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Representación Visual / Gráfico de Barras Adaptativo (Neuroeducación) */
+        .visualization {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            height: 200px;
+            background: #fafafa;
+            border-bottom: 3px solid var(--primary);
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .bar-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 30%;
+            height: 100%;
+            justify-content: flex-end;
+        }
+
+        .bar {
+            width: 100%;
+            border-radius: 8px 8px 0 0;
+            transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .bar-current { background: #2196f3; height: 0%; }
+        .bar-target { background: var(--accent); height: 0%; }
+        .bar-preview { background: #9c27b0; height: 0%; }
+
+        .bar-label {
+            margin-top: 8px;
+            font-weight: bold;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* Controles Accesibles de Entrada (Diseño Universal - DUA) */
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .counter-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .btn-accessible {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.1s, background-color 0.2s;
+        }
+
+        .btn-accessible:active {
+            transform: scale(0.95);
+        }
+
+        .btn-accessible:focus {
+            outline: 3px solid var(--accent);
+        }
+
+        .btn-minus { background: #d32f2f; }
+
+        #action-value {
+            font-size: 36px;
+            font-weight: bold;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .btn-action {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+            transition: background 0.2s;
+        }
+
+        .btn-action:hover {
+            background: #e65100;
+        }
+
+        /* Mensajes de Feedback */
+        .feedback-message {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback-success { background: #e8f5e9; color: #2e7d32; border: 2px solid #81c784; }
+        .feedback-error { background: #ffebee; color: #c62828; border: 2px solid #e57373; }
+
+        .score-board {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-weight: bold;
+            border-top: 2px dashed #ccc;
+            padding-top: 15px;
+        }
+
+        /* Modo Accesibilidad de Voz */
+        .voice-control {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🐾 Reserva Natural Digital 🐾</h1>
+        <p>¡Usa las matemáticas para proteger a los animales de la selva!</p>
+    </header>
+
+    <main class="game-container">
+        <!-- Panel de Misión Instructiva -->
+        <div class="mission-box" id="mission-text" role="alert">
+            Cargando misión ecológica...
+        </div>
+
+        <!-- Área de Gráficos de Barra Interactivos -->
+        <div class="visualization" aria-hidden="true">
+            <div class="bar-container">
+                <div id="bar-current" class="bar bar-current">0</div>
+                <div class="bar-label">Osos actuales</div>
+            </div>
+            <div class="bar-container">
+                <div id="bar-preview" class="bar bar-preview">0</div>
+                <div class="bar-label">Tu Cambios</div>
+            </div>
+            <div class="bar-container">
+                <div id="bar-target" class="bar bar-target">0</div>
+                <div class="bar-label">Meta ecológica</div>
+            </div>
+        </div>
+
+        <!-- Panel de Control de Operaciones -->
+        <div class="controls">
+            <p style="font-weight: bold; font-size: 14px;">¿Cuántos animales vas a cambiar?</p>
+            <div class="counter-controls">
+                <button class="btn-accessible btn-minus" id="btn-dec" aria-label="Disminuir cantidad">-</button>
+                <div id="action-value">0</div>
+                <button class="btn-accessible" id="btn-inc" aria-label="Aumentar cantidad">+</button>
+            </div>
+
+            <button class="btn-action" id="btn-submit">¡Ejecutar Cambio Ecológico!</button>
+        </div>
+
+        <!-- Alertas de Feedback Pedagógico Integrado -->
+        <div id="feedback" class="feedback-message"></div>
+
+        <!-- Marcador de Progreso de Niveles -->
+        <div class="score-board">
+            <span id="level-display">Nivel: 1 / 3</span>
+            <span id="score-display">Puntos de Guardaparque: 0</span>
+        </div>
+
+        <div class="voice-control">
+            <input type="checkbox" id="chk-voice" checked>
+            <label for="chk-voice">🔊 Activar asistencia de voz pedagógica (DUA)</label>
+        </div>
+    </main>
+
+    <script>
+        // Configuración de los niveles matemáticos estructurados (Suma y Resta)
+        const levels = [
+            { current: 8, target: 14, type: "suma", animal: "osos de anteojos" },
+            { current: 15, target: 9, type: "resta", animal: "guacamayos" },
+            { current: 6, target: 15, type: "suma", animal: "monos choro" }
+        ];
+
+        let currentLevelIndex = 0;
+        let userActionValue = 0;
+        let score = 0;
+
+        // Elementos del DOM
+        const missionText = document.getElementById('mission-text');
+        const barCurrent = document.getElementById('bar-current');
+        const barTarget = document.getElementById('bar-target');
+        const barPreview = document.getElementById('bar-preview');
+        const actionValueDisplay = document.getElementById('action-value');
+        const btnInc = document.getElementById('btn-inc');
+        const btnDec = document.getElementById('btn-dec');
+        const btnSubmit = document.getElementById('btn-submit');
+        const feedback = document.getElementById('feedback');
+        const levelDisplay = document.getElementById('level-display');
+        const scoreDisplay = document.getElementById('score-display');
+        const chkVoice = document.getElementById('chk-voice');
+
+        // Inicializar Nivel
+        function initLevel() {
+            userActionValue = 0;
+            updateDisplay();
+            feedback.style.display = 'none';
+            
+            const lvl = levels[currentLevelIndex];
+            let mensaje = "";
+            
+            if(lvl.type === "suma") {
+                mensaje = `¡Alerta Guardaparque! Actualmente hay ${lvl.current} ${lvl.animal} en el sector, pero el ecosistema necesita exactamente ${lvl.target} para estar equilibrado. ¿Cuántos debes AGREGAR?`;
+            } else {
+                mensaje = `¡Atención! Hay una sobrepoblación de ${lvl.current} ${lvl.animal}. Necesitamos reubicar a un grupo para dejar exactamente ${lvl.target} en el bosque. ¿Cuántos debes QUITAR?`;
+            }
+            
+            missionText.innerText = mensaje;
+            levelDisplay.innerText = `Nivel: ${currentLevelIndex + 1} / ${levels.length}`;
+            speak(mensaje);
+        }
+
+        // Renderizado del Gráfico de Barras Adaptativo (Andamiaje Visual)
+        function updateDisplay() {
+            const lvl = levels[currentLevelIndex];
+            actionValueDisplay.innerText = userActionValue;
+
+            // Encontrar el valor máximo para calcular proporciones del gráfico
+            const maxVal = Math.max(lvl.current, lvl.target, lvl.current + userActionValue) || 1;
+
+            // Calcular alturas dinámicas en base al porcentaje máximo
+            barCurrent.style.height = `${(lvl.current / maxVal) * 100}%`;
+            barCurrent.innerText = lvl.current;
+
+            barTarget.style.height = `${(lvl.target / maxVal) * 100}%`;
+            barTarget.innerText = lvl.target;
+
+            // Simulación del cálculo en la barra del medio (Preview)
+            let previewValue = lvl.type === "suma" ? lvl.current + userActionValue : lvl.current - userActionValue;
+            if(previewValue < 0) previewValue = 0;
+
+            barPreview.style.height = `${(previewValue / maxVal) * 100}%`;
+            barPreview.innerText = previewValue;
+        }
+
+        // Eventos del contador con control de límites para evitar números absurdos
+        btnInc.addEventListener('click', () => {
+            if (userActionValue < 30) {
+                userActionValue++;
+                updateDisplay();
+            }
+        });
+
+        btnDec.addEventListener('click', () => {
+            if (userActionValue > 0) {
+                userActionValue--;
+                updateDisplay();
+            }
+        });
+
+        // Lógica de Validación (Feedback Formativo y Ensayo-Error Constructivo)
+        btnSubmit.addEventListener('click', () => {
+            const lvl = levels[currentLevelIndex];
+            let isCorrect = false;
+            let calculatedResult = lvl.type === "suma" ? lvl.current + userActionValue : lvl.current - userActionValue;
+
+            if (calculatedResult === lvl.target) {
+                isCorrect = true;
+            }
+
+            if (isCorrect) {
+                score += 100;
+                scoreDisplay.innerText = `Puntos de Guardaparque: ${score}`;
+                showFeedback(`¡Excelente trabajo! Operación correcta. Lograste el equilibrio ecológico de la zona.`, "success");
+                
+                setTimeout(() => {
+                    currentLevelIndex++;
+                    if (currentLevelIndex < levels.length) {
+                        initLevel();
+                    } else {
+                        const finalMsg = `¡Felicidades, eres un Guardaparque Maestro! Has completado todas las misiones y protegido nuestra selva de forma perfecta.`;
+                        missionText.innerText = finalMsg;
+                        speak(finalMsg);
+                        document.querySelector('.controls').style.display = 'none';
+                    }
+                }, 4000);
+            } else {
+                // Mensaje guiado con andamiaje pedagógico analizando la diferencia
+                let guiaText = "";
+                if (calculatedResult < lvl.target) {
+                    guiaText = `¡Cuidado! Tu cálculo da un total de ${calculatedResult} animales. Aún te faltan espacios vacíos para alcanzar la meta de ${lvl.target}. ¡Vuelve a intentarlo!`;
+                } else {
+                    guiaText = `¡Oh! Te pasaste de la meta. Con tu cambio hay ${calculatedResult} animales, pero solo necesitamos ${lvl.target}. Ajusta tu contador.`;
+                }
+                showFeedback(guiaText, "error");
+            }
+        });
+
+        function showFeedback(text, type) {
+            feedback.innerText = text;
+            feedback.className = `feedback-message feedback-${type}`;
+            feedback.style.display = 'block';
+            speak(text);
+        }
+
+        // API de Asistencia por Voz Inteligente (DUA)
+        function speak(text) {
+            if (chkVoice.checked && 'speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // Detener lecturas previas
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'es-PE'; // Español peruano si está disponible
+                utterance.rate = 0.9;     // Velocidad pausada idónea para primaria
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // Iniciar el juego automáticamente al cargar la web
+        window.onload = initLevel;
+    </script>
+</body>
+</html>
